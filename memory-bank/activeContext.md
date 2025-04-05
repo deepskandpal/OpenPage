@@ -1,0 +1,93 @@
+# Active Context
+
+## Current Focus: Implementing AI Chat Integration
+
+Our immediate focus is on implementing AI chat capabilities into the app, allowing users to interact with AI language models to enhance their writing experience. This follows the redesign of the core UI to a Scrivener-like three-panel layout, which has been completed.
+
+## AI Chat Integration Design
+
+### Key Components Implemented
+- **Secure API Key Management** - Created a system to store API keys securely in the Keychain
+- **ChatMessage and ChatConversation Models** - Developed SwiftData models for persistent chat history
+- **APIKeySetupView** - Built an interface for users to enter and validate API keys
+- **AISettingsView** - Created settings panel for configuring AI providers and features
+- **ChatView** - Implemented the main chat interface with message bubbles and document context integration
+
+### AI Provider Support
+- Added support for multiple AI providers (currently Claude and OpenAI)
+- Created a provider-agnostic interface that can be extended to other LLMs
+- Implemented secure API key validation and storage
+- Built UI for managing API keys and selecting default providers
+
+### Document Context Integration
+- Chat system is aware of the current document context
+- Built features to incorporate document content into prompts
+- Added specialized tools for document summarization and style analysis
+- Created conversation persistence linked to specific documents
+
+### Security Considerations
+- API keys are stored securely in the system Keychain
+- Keys never appear in application logs or storage
+- All API key validation is done with secure connections
+
+## Recent Changes
+
+### SwiftData Models for Chat
+- Created ChatMessage model with role, content, and timestamp
+- Implemented ChatConversation model for organizing messages
+- Added relationships between messages and conversations
+- Set up cascading deletion to maintain database integrity
+- Added document context references to enable document-aware conversations
+
+### API Key Management
+- Implemented APIKeyManager for secure API key storage
+- Created Keychain integration for sensitive credential storage
+- Added validation methods for API key format checking
+- Built UI components for API key input and management
+
+### Settings Integration
+- Updated app settings model to include AI provider preferences
+- Enhanced settings UI with dedicated AI configuration panel
+- Added toggles for enabling/disabling AI features
+- Created provider selection interface with availability indicators
+
+### Chat Interface
+- Designed and implemented ChatView with message bubbles
+- Created conversation management with persistent history
+- Built context-aware document integration features
+- Implemented simulated responses for prototype testing
+- Added conversation clearing and management functions
+
+## Technical Considerations
+- Maintained secure practices for API key storage using Keychain
+- Designed models to support future offline/online switching
+- Created extensible provider system for future AI model support
+- Made conversation storage efficient with SwiftData relationships
+- Added proper error handling for network failures and API issues
+
+## Next Steps
+
+### Priority 1: API Integration
+- Complete the provider-specific API clients
+- Implement proper message streaming for realistic chat experience
+- Add token counting and management for API quotas
+- Create proper error handling for API failures
+
+### Priority 2: Enhanced Context Management
+- Improve document context awareness with semantic chunking
+- Add support for project-level context (multiple documents)
+- Implement conversation memory management for long chats
+- Create context retention across chat sessions
+
+### Priority 3: Advanced Chat Features
+- Add support for generating images and diagrams
+- Implement code block formatting and syntax highlighting
+- Create specialized writing improvement commands
+- Build style and tone analysis capabilities
+
+## Key Design Principles
+- Maintain familiar interface for Scrivener users while modernizing the experience
+- Focus on performance with large complex documents and projects
+- Ensure all advanced formatting translates correctly to export formats
+- Design AI features to enhance rather than distract from the writing process
+- Create a scalable architecture that can grow with future feature additions

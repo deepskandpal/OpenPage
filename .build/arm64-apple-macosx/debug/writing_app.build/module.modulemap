@@ -1,0 +1,4 @@
+module writing_app {
+    header "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/writing_app.build/writing_app-Swift.h"
+    requires objc
+}

@@ -1,0 +1,4 @@
+module KeychainAccess {
+    header "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/KeychainAccess.build/KeychainAccess-Swift.h"
+    requires objc
+}

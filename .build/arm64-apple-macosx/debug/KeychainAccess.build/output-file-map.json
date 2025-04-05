@@ -1,0 +1,11 @@
+{
+  "": {
+    "swift-dependencies": "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/KeychainAccess.build/master.swiftdeps"
+  },
+  "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/checkouts/KeychainAccess/Lib/KeychainAccess/Keychain.swift": {
+    "dependencies": "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/KeychainAccess.build/Keychain.d",
+    "object": "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/KeychainAccess.build/Keychain.swift.o",
+    "swiftmodule": "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/KeychainAccess.build/Keychain~partial.swiftmodule",
+    "swift-dependencies": "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/KeychainAccess.build/Keychain.swiftdeps"
+  }
+}

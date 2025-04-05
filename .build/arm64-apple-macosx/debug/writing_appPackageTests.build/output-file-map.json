@@ -1,0 +1,11 @@
+{
+  "": {
+    "swift-dependencies": "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/writing_appPackageTests.build/master.swiftdeps"
+  },
+  "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/writing_appPackageTests.derived/runner.swift": {
+    "dependencies": "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/writing_appPackageTests.build/runner.d",
+    "object": "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/writing_appPackageTests.build/runner.swift.o",
+    "swiftmodule": "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/writing_appPackageTests.build/runner~partial.swiftmodule",
+    "swift-dependencies": "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/writing_appPackageTests.build/runner.swiftdeps"
+  }
+}

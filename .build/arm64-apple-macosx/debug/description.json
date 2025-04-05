@@ -1,0 +1,1362 @@
+{
+  "builtTestProducts" : [
+    {
+      "binaryPath" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/writing_appPackageTests.xctest/Contents/MacOS/writing_appPackageTests",
+      "packagePath" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app",
+      "productName" : "writing_appPackageTests"
+    }
+  ],
+  "copyCommands" : {
+
+  },
+  "explicitTargetDependencyImportCheckingMode" : {
+    "none" : {
+
+    }
+  },
+  "generatedSourceTargetSet" : [
+
+  ],
+  "pluginDescriptions" : [
+
+  ],
+  "swiftCommands" : {
+    "C.KeychainAccess-arm64-apple-macosx14.0-debug.module" : {
+      "executable" : "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+      "fileList" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/KeychainAccess.build/sources",
+      "importPath" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/Modules",
+      "inputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/checkouts/KeychainAccess/Lib/KeychainAccess/Keychain.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/KeychainAccess.build/sources"
+        }
+      ],
+      "isLibrary" : true,
+      "moduleName" : "KeychainAccess",
+      "moduleOutputPath" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/Modules/KeychainAccess.swiftmodule",
+      "objects" : [
+        "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/KeychainAccess.build/Keychain.swift.o"
+      ],
+      "otherArguments" : [
+        "-target",
+        "arm64-apple-macosx10.13",
+        "-enable-batch-mode",
+        "-index-store-path",
+        "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/index/store",
+        "-Onone",
+        "-enable-testing",
+        "-j16",
+        "-DSWIFT_PACKAGE",
+        "-DDEBUG",
+        "-module-cache-path",
+        "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/ModuleCache",
+        "-parseable-output",
+        "-parse-as-library",
+        "-emit-objc-header",
+        "-emit-objc-header-path",
+        "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/KeychainAccess.build/KeychainAccess-Swift.h",
+        "-color-diagnostics",
+        "-swift-version",
+        "5",
+        "-sdk",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk",
+        "-F",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+        "-I",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+        "-L",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+        "-g",
+        "-Xcc",
+        "-isysroot",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk",
+        "-Xcc",
+        "-F",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+        "-Xcc",
+        "-fPIC",
+        "-Xcc",
+        "-g",
+        "-suppress-warnings"
+      ],
+      "outputFileMapPath" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/KeychainAccess.build/output-file-map.json",
+      "outputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/KeychainAccess.build/Keychain.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/Modules/KeychainAccess.swiftmodule"
+        }
+      ],
+      "prepareForIndexing" : false,
+      "sources" : [
+        "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/checkouts/KeychainAccess/Lib/KeychainAccess/Keychain.swift"
+      ],
+      "tempsPath" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/KeychainAccess.build",
+      "wholeModuleOptimization" : false
+    },
+    "C.writing_app-arm64-apple-macosx14.0-debug.module" : {
+      "executable" : "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+      "fileList" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/writing_app.build/sources",
+      "importPath" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/Modules",
+      "inputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/ContentView.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/Item.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/Models/AppSettings.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/Models/Document.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/Models/DocumentSection.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/Models/DocumentTemplate.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/Models/ImportTest.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/Models/Project.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/Services/AI/APIKeyManager.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/Services/AI/ChatMessage.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/Services/AI/LLMService.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/Sources/writing_app/writing_app.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/Tests/writing_appTests/writing_appTests.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/ViewModels/DocumentViewModel.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/ViewModels/ProjectViewModel.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/ViewModels/SettingsViewModel.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/Views/AIAPIKeySetupView.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/Views/ChatView.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/Views/DocumentSectionsSidebar.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/Views/EditorView.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/Views/EnhancedDocumentCreationView.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/Views/HierarchicalEditorView.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/Views/MainView.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/Views/SettingsView.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/Views/SidebarView.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/Views/SimplestInspectorView.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/Views/TemplateSelectionView.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/Views/Utilities/LayoutUtilities.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/writing_appApp.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/Modules/KeychainAccess.swiftmodule"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/writing_app.build/sources"
+        }
+      ],
+      "isLibrary" : true,
+      "moduleName" : "writing_app",
+      "moduleOutputPath" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/Modules/writing_app.swiftmodule",
+      "objects" : [
+        "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/writing_app.build/ContentView.swift.o",
+        "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/writing_app.build/Item.swift.o",
+        "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/writing_app.build/AppSettings.swift.o",
+        "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/writing_app.build/Document.swift.o",
+        "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/writing_app.build/DocumentSection.swift.o",
+        "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/writing_app.build/DocumentTemplate.swift.o",
+        "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/writing_app.build/ImportTest.swift.o",
+        "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/writing_app.build/Project.swift.o",
+        "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/writing_app.build/APIKeyManager.swift.o",
+        "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/writing_app.build/ChatMessage.swift.o",
+        "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/writing_app.build/LLMService.swift.o",
+        "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/writing_app.build/writing_app.swift.o",
+        "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/writing_app.build/writing_appTests.swift.o",
+        "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/writing_app.build/DocumentViewModel.swift.o",
+        "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/writing_app.build/ProjectViewModel.swift.o",
+        "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/writing_app.build/SettingsViewModel.swift.o",
+        "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/writing_app.build/AIAPIKeySetupView.swift.o",
+        "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/writing_app.build/ChatView.swift.o",
+        "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/writing_app.build/DocumentSectionsSidebar.swift.o",
+        "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/writing_app.build/EditorView.swift.o",
+        "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/writing_app.build/EnhancedDocumentCreationView.swift.o",
+        "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/writing_app.build/HierarchicalEditorView.swift.o",
+        "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/writing_app.build/MainView.swift.o",
+        "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/writing_app.build/SettingsView.swift.o",
+        "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/writing_app.build/SidebarView.swift.o",
+        "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/writing_app.build/SimplestInspectorView.swift.o",
+        "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/writing_app.build/TemplateSelectionView.swift.o",
+        "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/writing_app.build/LayoutUtilities.swift.o",
+        "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/writing_app.build/writing_appApp.swift.o"
+      ],
+      "otherArguments" : [
+        "-target",
+        "arm64-apple-macosx13.0",
+        "-enable-batch-mode",
+        "-index-store-path",
+        "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/index/store",
+        "-Onone",
+        "-enable-testing",
+        "-j16",
+        "-DSWIFT_PACKAGE",
+        "-DDEBUG",
+        "-module-cache-path",
+        "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/ModuleCache",
+        "-parseable-output",
+        "-parse-as-library",
+        "-emit-objc-header",
+        "-emit-objc-header-path",
+        "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/writing_app.build/writing_app-Swift.h",
+        "-color-diagnostics",
+        "-swift-version",
+        "5",
+        "-sdk",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk",
+        "-F",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+        "-I",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+        "-L",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+        "-g",
+        "-Xcc",
+        "-isysroot",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk",
+        "-Xcc",
+        "-F",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+        "-Xcc",
+        "-fPIC",
+        "-Xcc",
+        "-g",
+        "-package-name",
+        "writing_app"
+      ],
+      "outputFileMapPath" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/writing_app.build/output-file-map.json",
+      "outputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/writing_app.build/ContentView.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/writing_app.build/Item.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/writing_app.build/AppSettings.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/writing_app.build/Document.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/writing_app.build/DocumentSection.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/writing_app.build/DocumentTemplate.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/writing_app.build/ImportTest.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/writing_app.build/Project.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/writing_app.build/APIKeyManager.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/writing_app.build/ChatMessage.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/writing_app.build/LLMService.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/writing_app.build/writing_app.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/writing_app.build/writing_appTests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/writing_app.build/DocumentViewModel.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/writing_app.build/ProjectViewModel.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/writing_app.build/SettingsViewModel.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/writing_app.build/AIAPIKeySetupView.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/writing_app.build/ChatView.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/writing_app.build/DocumentSectionsSidebar.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/writing_app.build/EditorView.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/writing_app.build/EnhancedDocumentCreationView.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/writing_app.build/HierarchicalEditorView.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/writing_app.build/MainView.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/writing_app.build/SettingsView.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/writing_app.build/SidebarView.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/writing_app.build/SimplestInspectorView.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/writing_app.build/TemplateSelectionView.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/writing_app.build/LayoutUtilities.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/writing_app.build/writing_appApp.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/Modules/writing_app.swiftmodule"
+        }
+      ],
+      "prepareForIndexing" : false,
+      "sources" : [
+        "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/ContentView.swift",
+        "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/Item.swift",
+        "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/Models/AppSettings.swift",
+        "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/Models/Document.swift",
+        "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/Models/DocumentSection.swift",
+        "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/Models/DocumentTemplate.swift",
+        "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/Models/ImportTest.swift",
+        "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/Models/Project.swift",
+        "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/Services/AI/APIKeyManager.swift",
+        "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/Services/AI/ChatMessage.swift",
+        "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/Services/AI/LLMService.swift",
+        "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/Sources/writing_app/writing_app.swift",
+        "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/Tests/writing_appTests/writing_appTests.swift",
+        "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/ViewModels/DocumentViewModel.swift",
+        "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/ViewModels/ProjectViewModel.swift",
+        "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/ViewModels/SettingsViewModel.swift",
+        "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/Views/AIAPIKeySetupView.swift",
+        "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/Views/ChatView.swift",
+        "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/Views/DocumentSectionsSidebar.swift",
+        "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/Views/EditorView.swift",
+        "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/Views/EnhancedDocumentCreationView.swift",
+        "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/Views/HierarchicalEditorView.swift",
+        "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/Views/MainView.swift",
+        "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/Views/SettingsView.swift",
+        "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/Views/SidebarView.swift",
+        "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/Views/SimplestInspectorView.swift",
+        "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/Views/TemplateSelectionView.swift",
+        "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/Views/Utilities/LayoutUtilities.swift",
+        "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/writing_appApp.swift"
+      ],
+      "tempsPath" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/writing_app.build",
+      "wholeModuleOptimization" : false
+    },
+    "C.writing_appPackageTests-arm64-apple-macosx14.0-debug.module" : {
+      "executable" : "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+      "fileList" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/writing_appPackageTests.build/sources",
+      "importPath" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/Modules",
+      "inputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/writing_appPackageTests.derived/runner.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/Modules/writing_appTests.swiftmodule"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/writing_appPackageTests.build/sources"
+        }
+      ],
+      "isLibrary" : true,
+      "moduleName" : "writing_appPackageTests",
+      "moduleOutputPath" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/Modules/writing_appPackageTests.swiftmodule",
+      "objects" : [
+        "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/writing_appPackageTests.build/runner.swift.o"
+      ],
+      "otherArguments" : [
+        "-target",
+        "arm64-apple-macosx13.0",
+        "-enable-batch-mode",
+        "-index-store-path",
+        "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/index/store",
+        "-Onone",
+        "-enable-testing",
+        "-j16",
+        "-DSWIFT_PACKAGE",
+        "-DDEBUG",
+        "-module-cache-path",
+        "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/ModuleCache",
+        "-parseable-output",
+        "-parse-as-library",
+        "-emit-objc-header",
+        "-emit-objc-header-path",
+        "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/writing_appPackageTests.build/writing_appPackageTests-Swift.h",
+        "-color-diagnostics",
+        "-sdk",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk",
+        "-F",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+        "-I",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+        "-L",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+        "-g",
+        "-Xcc",
+        "-isysroot",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk",
+        "-Xcc",
+        "-F",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+        "-Xcc",
+        "-fPIC",
+        "-Xcc",
+        "-g",
+        "-package-name",
+        "writing_app"
+      ],
+      "outputFileMapPath" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/writing_appPackageTests.build/output-file-map.json",
+      "outputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/writing_appPackageTests.build/runner.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/Modules/writing_appPackageTests.swiftmodule"
+        }
+      ],
+      "prepareForIndexing" : false,
+      "sources" : [
+        "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/writing_appPackageTests.derived/runner.swift"
+      ],
+      "tempsPath" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/writing_appPackageTests.build",
+      "wholeModuleOptimization" : false
+    },
+    "C.writing_appTests-arm64-apple-macosx14.0-debug.module" : {
+      "executable" : "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+      "fileList" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/writing_appTests.build/sources",
+      "importPath" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/Modules",
+      "inputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/writing_appTests/Models/AppSettingsTests.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/writing_appTests/Services/APIKeyManagerTests.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/writing_appTests/Services/LLMServiceTests.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/writing_appTests/ViewModels/SettingsViewModelTests.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/writing_appTests/Views/SettingsViewTests.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/writing_appTests/writing_appTests.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/Modules/writing_app.swiftmodule"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/writing_appTests.build/sources"
+        }
+      ],
+      "isLibrary" : true,
+      "moduleName" : "writing_appTests",
+      "moduleOutputPath" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/Modules/writing_appTests.swiftmodule",
+      "objects" : [
+        "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/writing_appTests.build/AppSettingsTests.swift.o",
+        "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/writing_appTests.build/APIKeyManagerTests.swift.o",
+        "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/writing_appTests.build/LLMServiceTests.swift.o",
+        "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/writing_appTests.build/SettingsViewModelTests.swift.o",
+        "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/writing_appTests.build/SettingsViewTests.swift.o",
+        "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/writing_appTests.build/writing_appTests.swift.o"
+      ],
+      "otherArguments" : [
+        "-target",
+        "arm64-apple-macosx13.0",
+        "-enable-batch-mode",
+        "-index-store-path",
+        "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/index/store",
+        "-Onone",
+        "-enable-testing",
+        "-j16",
+        "-DSWIFT_PACKAGE",
+        "-DDEBUG",
+        "-module-cache-path",
+        "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/ModuleCache",
+        "-parseable-output",
+        "-parse-as-library",
+        "-color-diagnostics",
+        "-swift-version",
+        "5",
+        "-sdk",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk",
+        "-F",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+        "-I",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+        "-L",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+        "-g",
+        "-Xcc",
+        "-isysroot",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk",
+        "-Xcc",
+        "-F",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+        "-Xcc",
+        "-fPIC",
+        "-Xcc",
+        "-g",
+        "-package-name",
+        "writing_app"
+      ],
+      "outputFileMapPath" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/writing_appTests.build/output-file-map.json",
+      "outputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/writing_appTests.build/AppSettingsTests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/writing_appTests.build/APIKeyManagerTests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/writing_appTests.build/LLMServiceTests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/writing_appTests.build/SettingsViewModelTests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/writing_appTests.build/SettingsViewTests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/writing_appTests.build/writing_appTests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/Modules/writing_appTests.swiftmodule"
+        }
+      ],
+      "prepareForIndexing" : false,
+      "sources" : [
+        "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/writing_appTests/Models/AppSettingsTests.swift",
+        "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/writing_appTests/Services/APIKeyManagerTests.swift",
+        "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/writing_appTests/Services/LLMServiceTests.swift",
+        "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/writing_appTests/ViewModels/SettingsViewModelTests.swift",
+        "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/writing_appTests/Views/SettingsViewTests.swift",
+        "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/writing_appTests/writing_appTests.swift"
+      ],
+      "tempsPath" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/writing_appTests.build",
+      "wholeModuleOptimization" : false
+    }
+  },
+  "swiftFrontendCommands" : {
+
+  },
+  "swiftTargetScanArgs" : {
+    "KeychainAccess" : [
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+      "-module-name",
+      "KeychainAccess",
+      "-incremental",
+      "-c",
+      "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/checkouts/KeychainAccess/Lib/KeychainAccess/Keychain.swift",
+      "-I",
+      "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/Modules",
+      "-target",
+      "arm64-apple-macosx10.13",
+      "-enable-batch-mode",
+      "-index-store-path",
+      "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/index/store",
+      "-Onone",
+      "-enable-testing",
+      "-j16",
+      "-DSWIFT_PACKAGE",
+      "-DDEBUG",
+      "-module-cache-path",
+      "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/ModuleCache",
+      "-parseable-output",
+      "-parse-as-library",
+      "-emit-objc-header",
+      "-emit-objc-header-path",
+      "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/KeychainAccess.build/KeychainAccess-Swift.h",
+      "-color-diagnostics",
+      "-swift-version",
+      "5",
+      "-sdk",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk",
+      "-F",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+      "-I",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+      "-L",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+      "-g",
+      "-Xcc",
+      "-isysroot",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk",
+      "-Xcc",
+      "-F",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+      "-Xcc",
+      "-fPIC",
+      "-Xcc",
+      "-g",
+      "-suppress-warnings",
+      "-driver-use-frontend-path",
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc"
+    ],
+    "writing_app" : [
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+      "-module-name",
+      "writing_app",
+      "-package-name",
+      "writing_app",
+      "-incremental",
+      "-c",
+      "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/ContentView.swift",
+      "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/Item.swift",
+      "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/Models/AppSettings.swift",
+      "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/Models/Document.swift",
+      "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/Models/DocumentSection.swift",
+      "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/Models/DocumentTemplate.swift",
+      "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/Models/ImportTest.swift",
+      "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/Models/Project.swift",
+      "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/Services/AI/APIKeyManager.swift",
+      "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/Services/AI/ChatMessage.swift",
+      "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/Services/AI/LLMService.swift",
+      "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/Sources/writing_app/writing_app.swift",
+      "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/Tests/writing_appTests/writing_appTests.swift",
+      "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/ViewModels/DocumentViewModel.swift",
+      "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/ViewModels/ProjectViewModel.swift",
+      "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/ViewModels/SettingsViewModel.swift",
+      "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/Views/AIAPIKeySetupView.swift",
+      "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/Views/ChatView.swift",
+      "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/Views/DocumentSectionsSidebar.swift",
+      "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/Views/EditorView.swift",
+      "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/Views/EnhancedDocumentCreationView.swift",
+      "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/Views/HierarchicalEditorView.swift",
+      "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/Views/MainView.swift",
+      "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/Views/SettingsView.swift",
+      "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/Views/SidebarView.swift",
+      "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/Views/SimplestInspectorView.swift",
+      "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/Views/TemplateSelectionView.swift",
+      "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/Views/Utilities/LayoutUtilities.swift",
+      "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/writing_appApp.swift",
+      "-I",
+      "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/Modules",
+      "-target",
+      "arm64-apple-macosx13.0",
+      "-enable-batch-mode",
+      "-index-store-path",
+      "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/index/store",
+      "-Onone",
+      "-enable-testing",
+      "-j16",
+      "-DSWIFT_PACKAGE",
+      "-DDEBUG",
+      "-module-cache-path",
+      "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/ModuleCache",
+      "-parseable-output",
+      "-parse-as-library",
+      "-emit-objc-header",
+      "-emit-objc-header-path",
+      "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/writing_app.build/writing_app-Swift.h",
+      "-color-diagnostics",
+      "-swift-version",
+      "5",
+      "-sdk",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk",
+      "-F",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+      "-I",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+      "-L",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+      "-g",
+      "-Xcc",
+      "-isysroot",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk",
+      "-Xcc",
+      "-F",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+      "-Xcc",
+      "-fPIC",
+      "-Xcc",
+      "-g",
+      "-package-name",
+      "writing_app",
+      "-driver-use-frontend-path",
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc"
+    ],
+    "writing_appPackageTests" : [
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+      "-module-name",
+      "writing_appPackageTests",
+      "-package-name",
+      "writing_app",
+      "-incremental",
+      "-c",
+      "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/writing_appPackageTests.derived/runner.swift",
+      "-I",
+      "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/Modules",
+      "-target",
+      "arm64-apple-macosx13.0",
+      "-enable-batch-mode",
+      "-index-store-path",
+      "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/index/store",
+      "-Onone",
+      "-enable-testing",
+      "-j16",
+      "-DSWIFT_PACKAGE",
+      "-DDEBUG",
+      "-module-cache-path",
+      "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/ModuleCache",
+      "-parseable-output",
+      "-parse-as-library",
+      "-emit-objc-header",
+      "-emit-objc-header-path",
+      "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/writing_appPackageTests.build/writing_appPackageTests-Swift.h",
+      "-color-diagnostics",
+      "-sdk",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk",
+      "-F",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+      "-I",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+      "-L",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+      "-g",
+      "-Xcc",
+      "-isysroot",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk",
+      "-Xcc",
+      "-F",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+      "-Xcc",
+      "-fPIC",
+      "-Xcc",
+      "-g",
+      "-package-name",
+      "writing_app",
+      "-driver-use-frontend-path",
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc"
+    ],
+    "writing_appTests" : [
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+      "-module-name",
+      "writing_appTests",
+      "-package-name",
+      "writing_app",
+      "-incremental",
+      "-c",
+      "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/writing_appTests/Models/AppSettingsTests.swift",
+      "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/writing_appTests/Services/APIKeyManagerTests.swift",
+      "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/writing_appTests/Services/LLMServiceTests.swift",
+      "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/writing_appTests/ViewModels/SettingsViewModelTests.swift",
+      "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/writing_appTests/Views/SettingsViewTests.swift",
+      "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/writing_appTests/writing_appTests.swift",
+      "-I",
+      "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/Modules",
+      "-target",
+      "arm64-apple-macosx13.0",
+      "-enable-batch-mode",
+      "-index-store-path",
+      "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/index/store",
+      "-Onone",
+      "-enable-testing",
+      "-j16",
+      "-DSWIFT_PACKAGE",
+      "-DDEBUG",
+      "-module-cache-path",
+      "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/ModuleCache",
+      "-parseable-output",
+      "-parse-as-library",
+      "-color-diagnostics",
+      "-swift-version",
+      "5",
+      "-sdk",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk",
+      "-F",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+      "-I",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+      "-L",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+      "-g",
+      "-Xcc",
+      "-isysroot",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk",
+      "-Xcc",
+      "-F",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+      "-Xcc",
+      "-fPIC",
+      "-Xcc",
+      "-g",
+      "-package-name",
+      "writing_app",
+      "-driver-use-frontend-path",
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc"
+    ]
+  },
+  "targetDependencyMap" : {
+    "KeychainAccess" : [
+
+    ],
+    "writing_app" : [
+      "KeychainAccess"
+    ],
+    "writing_appPackageTests" : [
+      "writing_appTests",
+      "writing_app",
+      "KeychainAccess"
+    ],
+    "writing_appTests" : [
+      "writing_app",
+      "KeychainAccess"
+    ]
+  },
+  "testDiscoveryCommands" : {
+
+  },
+  "testEntryPointCommands" : {
+    "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/writing_appPackageTests.derived/runner.swift" : {
+      "inputs" : [
+
+      ],
+      "outputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/writing_appPackageTests.derived/runner.swift"
+        }
+      ]
+    }
+  },
+  "writeCommands" : {
+    "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/KeychainAccess.build/sources" : {
+      "alwaysOutOfDate" : false,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<sources-file-list>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/checkouts/KeychainAccess/Lib/KeychainAccess/Keychain.swift"
+        }
+      ],
+      "outputFilePath" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/KeychainAccess.build/sources"
+    },
+    "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt" : {
+      "alwaysOutOfDate" : true,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<swift-get-version>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc"
+        }
+      ],
+      "outputFilePath" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt"
+    },
+    "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/writing_app.build/sources" : {
+      "alwaysOutOfDate" : false,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<sources-file-list>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/ContentView.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/Item.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/Models/AppSettings.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/Models/Document.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/Models/DocumentSection.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/Models/DocumentTemplate.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/Models/ImportTest.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/Models/Project.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/Services/AI/APIKeyManager.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/Services/AI/ChatMessage.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/Services/AI/LLMService.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/Sources/writing_app/writing_app.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/Tests/writing_appTests/writing_appTests.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/ViewModels/DocumentViewModel.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/ViewModels/ProjectViewModel.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/ViewModels/SettingsViewModel.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/Views/AIAPIKeySetupView.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/Views/ChatView.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/Views/DocumentSectionsSidebar.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/Views/EditorView.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/Views/EnhancedDocumentCreationView.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/Views/HierarchicalEditorView.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/Views/MainView.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/Views/SettingsView.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/Views/SidebarView.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/Views/SimplestInspectorView.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/Views/TemplateSelectionView.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/Views/Utilities/LayoutUtilities.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/writing_appApp.swift"
+        }
+      ],
+      "outputFilePath" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/writing_app.build/sources"
+    },
+    "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/writing_appPackageTests.build/sources" : {
+      "alwaysOutOfDate" : false,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<sources-file-list>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/writing_appPackageTests.derived/runner.swift"
+        }
+      ],
+      "outputFilePath" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/writing_appPackageTests.build/sources"
+    },
+    "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/writing_appPackageTests.product/Objects.LinkFileList" : {
+      "alwaysOutOfDate" : false,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<link-file-list>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/KeychainAccess.build/Keychain.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/writing_app.build/AIAPIKeySetupView.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/writing_app.build/APIKeyManager.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/writing_app.build/AppSettings.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/writing_app.build/ChatMessage.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/writing_app.build/ChatView.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/writing_app.build/ContentView.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/writing_app.build/Document.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/writing_app.build/DocumentSection.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/writing_app.build/DocumentSectionsSidebar.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/writing_app.build/DocumentTemplate.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/writing_app.build/DocumentViewModel.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/writing_app.build/EditorView.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/writing_app.build/EnhancedDocumentCreationView.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/writing_app.build/HierarchicalEditorView.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/writing_app.build/ImportTest.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/writing_app.build/Item.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/writing_app.build/LLMService.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/writing_app.build/LayoutUtilities.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/writing_app.build/MainView.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/writing_app.build/Project.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/writing_app.build/ProjectViewModel.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/writing_app.build/SettingsView.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/writing_app.build/SettingsViewModel.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/writing_app.build/SidebarView.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/writing_app.build/SimplestInspectorView.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/writing_app.build/TemplateSelectionView.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/writing_app.build/writing_app.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/writing_app.build/writing_appApp.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/writing_app.build/writing_appTests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/writing_appPackageTests.build/runner.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/writing_appTests.build/APIKeyManagerTests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/writing_appTests.build/AppSettingsTests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/writing_appTests.build/LLMServiceTests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/writing_appTests.build/SettingsViewModelTests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/writing_appTests.build/SettingsViewTests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/writing_appTests.build/writing_appTests.swift.o"
+        }
+      ],
+      "outputFilePath" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/writing_appPackageTests.product/Objects.LinkFileList"
+    },
+    "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/writing_appTests.build/sources" : {
+      "alwaysOutOfDate" : false,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<sources-file-list>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/writing_appTests/Models/AppSettingsTests.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/writing_appTests/Services/APIKeyManagerTests.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/writing_appTests/Services/LLMServiceTests.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/writing_appTests/ViewModels/SettingsViewModelTests.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/writing_appTests/Views/SettingsViewTests.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/writing_appTests/writing_appTests.swift"
+        }
+      ],
+      "outputFilePath" : "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/writing_appTests.build/sources"
+    }
+  }
+}

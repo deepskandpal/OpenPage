@@ -12,8 +12,8 @@
 	"argv": [
 		"/opt/homebrew/bin/xcode-build-server"
 	],
-	"workspace": "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/writing_app.xcodeproj/project.xcworkspace",
-	"build_root": "/Users/DKAdmin/Library/Developer/Xcode/DerivedData/writing_app-fwbcthtvbjyeypfgpeefdturyvtw",
-	"scheme": "writing_app",
+	"workspace": "/Users/deepanshukandpal/Documents/OpenPage/OpenPage.xcodeproj/project.xcworkspace",
+	"build_root": "/Users/deepanshukandpal/Library/Developer/Xcode/DerivedData/OpenPage",
+	"scheme": "OpenPage",
 	"kind": "xcode"
 }

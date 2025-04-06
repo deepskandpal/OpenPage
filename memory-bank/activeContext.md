@@ -91,3 +91,62 @@ Our immediate focus is on implementing AI chat capabilities into the app, allowi
 - Ensure all advanced formatting translates correctly to export formats
 - Design AI features to enhance rather than distract from the writing process
 - Create a scalable architecture that can grow with future feature additions
+
+## Current Focus
+
+### ✅ Project Restructuring and Renaming (COMPLETED - SOURCE FILES)
+
+The project restructuring and renaming process has been successfully completed for source files:
+
+1. Created scripts to identify duplicate files between root and writing_app directories
+2. Analyzed differences between duplicate files to determine which versions to keep
+3. Consolidated all necessary files into a new OpenPage directory structure
+4. Created and verified proper file structure for new OpenPage project
+5. Executed cleanup script to remove original files with a backup created (backup_20250406_143818)
+
+The restructuring provides several benefits:
+- Clean separation between legacy code and new project structure
+- Consistent naming across all files and resources
+- Eliminated duplicate code and resolved conflicting versions
+- Proper organization following Swift best practices
+
+### 🚨 Project Restructuring - Pending Xcode Project Creation
+
+After consolidating all source files, we need to create a new Xcode project to replace the old one:
+
+1. Root Cause: The build is failing because it's looking for '/Users/deepanshukandpal/Documents/OpenPage/writing_app.xcodeproj/project.xcworkspace' which was removed during cleanup
+2. Solution: We need to create a new Xcode project named "OpenPage" to replace the old "writing_app" project
+
+The following steps are required to complete the restructuring:
+
+1. Create a new Xcode project with the correct settings
+   - Product Name: OpenPage
+   - Organization Identifier: deepskandpal
+   - Interface: SwiftUI
+   - Language: Swift
+   - Include Tests: Yes
+
+2. Configure the new Xcode project
+   - Add existing files from the OpenPage directory
+   - Set the proper bundle identifier (deepskandpal.OpenPage)
+   - Import the OpenPage.entitlements file
+   - Set deployment target to macOS 14.0+
+
+3. Verify the application works correctly
+   - Build and run the application
+   - Test key functionality
+   - Ensure SwiftData migration works properly
+
+We've created several helper scripts to assist with this process:
+- recover_project.sh - Creates the OpenPage.xcodeproj directory structure
+- create_xcode_project.sh - Provides step-by-step instructions for creating the new Xcode project
+- verify_openpage.sh - Checks the OpenPage directory structure and identifies missing files
+
+### Next Steps
+
+- Create new Xcode project following the steps in create_xcode_project.sh
+- Build and test the application
+- Continue refinement of the hierarchical document structure
+- Design and implement advanced metadata UI for enhanced document properties
+- Consider additional SwiftData optimizations for performance
+- Explore additional AI integration features

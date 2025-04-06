@@ -1,4 +1,0 @@
-module writing_appPackageTests {
-    header "/Users/DKAdmin/Documents/Xcode/writing_app/writing_app/.build/arm64-apple-macosx/debug/writing_appPackageTests.build/writing_appPackageTests-Swift.h"
-    requires objc
-}

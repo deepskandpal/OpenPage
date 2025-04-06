@@ -1,1 +1,4 @@
-{}
+{
+    "sweetpad.build.xcodeWorkspacePath": "OpenPage.xcodeproj/project.xcworkspace", 
+    "sweetpad.build.xcodeSchemeName": "OpenPage"
+}

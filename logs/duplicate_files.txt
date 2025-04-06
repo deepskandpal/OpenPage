@@ -1,0 +1,21 @@
+CONTENT DIFFERS: Models/AppSettings.swift ≠ writing_app/Models/AppSettings.swift
+DUPLICATE: Models/Document.swift = writing_app/Models/Document.swift (Same Content)
+DUPLICATE: Models/DocumentSection.swift = writing_app/Models/DocumentSection.swift (Same Content)
+DUPLICATE: Models/DocumentTemplate.swift = writing_app/Models/DocumentTemplate.swift (Same Content)
+DUPLICATE: Models/Project.swift = writing_app/Models/Project.swift (Same Content)
+CONTENT DIFFERS: Services/AI/APIKeyManager.swift ≠ writing_app/Services/APIKeyManager.swift
+CONTENT DIFFERS: Services/AI/ChatMessage.swift ≠ writing_app/Models/ChatMessage.swift
+DUPLICATE: ViewModels/DocumentViewModel.swift = writing_app/ViewModels/DocumentViewModel.swift (Same Content)
+DUPLICATE: ViewModels/ProjectViewModel.swift = writing_app/ViewModels/ProjectViewModel.swift (Same Content)
+CONTENT DIFFERS: ViewModels/SettingsViewModel.swift ≠ writing_app/ViewModels/SettingsViewModel.swift
+CONTENT DIFFERS: Views/ChatView.swift ≠ writing_app/Views/ChatView.swift
+DUPLICATE: Views/DocumentSectionsSidebar.swift = writing_app/Views/DocumentSectionsSidebar.swift (Same Content)
+DUPLICATE: Views/EditorView.swift = writing_app/Views/EditorView.swift (Same Content)
+DUPLICATE: Views/EnhancedDocumentCreationView.swift = writing_app/Views/EnhancedDocumentCreationView.swift (Same Content)
+DUPLICATE: Views/HierarchicalEditorView.swift = writing_app/Views/HierarchicalEditorView.swift (Same Content)
+DUPLICATE: Views/MainView.swift = writing_app/Views/MainView.swift (Same Content)
+CONTENT DIFFERS: Views/SettingsView.swift ≠ writing_app/Views/SettingsView.swift
+DUPLICATE: Views/SidebarView.swift = writing_app/Views/SidebarView.swift (Same Content)
+CONTENT DIFFERS: Views/SimplestInspectorView.swift ≠ writing_app/Views/SimplestInspectorView.swift
+DUPLICATE: Views/TemplateSelectionView.swift = writing_app/Views/TemplateSelectionView.swift (Same Content)
+DUPLICATE: Views/Utilities/LayoutUtilities.swift = writing_app/Views/Utilities/LayoutUtilities.swift (Same Content)

@@ -6,6 +6,7 @@ struct SimplestInspectorView: View {
     var document: Document
     @State private var selectedTab = 0
     @Environment(\.modelContext) private var modelContext
+    @Environment(\.colorScheme) private var colorScheme
     
     // This creates a new SettingsViewModel when needed for the ChatView
     private var settingsViewModel: SettingsViewModel {
@@ -14,6 +15,16 @@ struct SimplestInspectorView: View {
         fetchDescriptor.fetchLimit = 1
         let settings = (try? modelContext.fetch(fetchDescriptor).first) ?? AppSettings()
         return SettingsViewModel(appSettings: settings)
+    }
+    
+    // Dynamic background color based on color scheme
+    private var backgroundColor: Color {
+        colorScheme == .dark ? Color.black.opacity(0.2) : Color.white
+    }
+    
+    // Dynamic secondary background color based on color scheme
+    private var secondaryBackgroundColor: Color {
+        colorScheme == .dark ? Color.black.opacity(0.3) : Color.gray.opacity(0.05)
     }
     
     var body: some View {
@@ -77,7 +88,7 @@ struct SimplestInspectorView: View {
                 .buttonStyle(.plain)
             }
             .padding(4)
-            .background(Color.gray.opacity(0.05))
+            .background(secondaryBackgroundColor)
             
             Divider()
             
@@ -132,7 +143,7 @@ struct SimplestInspectorView: View {
                     .padding(.horizontal)
                     .frame(maxWidth: .infinity, alignment: .leading)
                 }
-                .background(Color.white)
+                .background(backgroundColor)
             case 1:
                 // Notes content
                 VStack(spacing: 0) {
@@ -146,7 +157,7 @@ struct SimplestInspectorView: View {
                     
                     TextEditor(text: .constant(document.synopsis ?? "Add synopsis or notes here..."))
                         .padding(8)
-                        .background(Color.white)
+                        .background(backgroundColor)
                         .cornerRadius(4)
                         .overlay(
                             RoundedRectangle(cornerRadius: 4)
@@ -154,7 +165,7 @@ struct SimplestInspectorView: View {
                         )
                         .padding()
                 }
-                .background(Color.white)
+                .background(backgroundColor)
             case 2:
                 // Status content
                 ScrollView {
@@ -195,7 +206,7 @@ struct SimplestInspectorView: View {
                     .padding(.horizontal)
                     .frame(maxWidth: .infinity, alignment: .leading)
                 }
-                .background(Color.white)
+                .background(backgroundColor)
             case 3:
                 // AI chat content
                 ChatView(settingsViewModel: settingsViewModel, document: document)

@@ -3,6 +3,7 @@ import SwiftData
 
 struct ChatView: View {
     @Environment(\.modelContext) private var modelContext
+    @Environment(\.colorScheme) private var colorScheme
     var settingsViewModel: SettingsViewModel
     var document: Document?
     
@@ -11,6 +12,11 @@ struct ChatView: View {
     @State private var messages: [ChatMessage] = []
     @State private var isProcessing: Bool = false
     @State private var conversationId: String? = nil
+    
+    // Dynamic background color based on color scheme
+    private var headerBackground: Color {
+        colorScheme == .dark ? Color.black.opacity(0.3) : Color.gray.opacity(0.1)
+    }
     
     var body: some View {
         VStack(spacing: 0) {
@@ -32,7 +38,7 @@ struct ChatView: View {
                 .buttonStyle(.bordered)
             }
             .padding()
-            .background(Color.gray.opacity(0.1))
+            .background(headerBackground)
             
             Divider()
             
@@ -42,6 +48,7 @@ struct ChatView: View {
                     ForEach(messages) { message in
                         MessageBubbleView(message: message)
                             .padding(.horizontal)
+                            .environment(\.colorScheme, colorScheme)
                     }
                     
                     if isProcessing {
@@ -79,6 +86,7 @@ struct ChatView: View {
                 }
                 .padding(.vertical)
             }
+            .background(colorScheme == .dark ? Color.black.opacity(0.1) : Color.white)
             
             Divider()
             
@@ -95,6 +103,7 @@ struct ChatView: View {
                 .disabled(message.isEmpty || isProcessing)
             }
             .padding()
+            .background(colorScheme == .dark ? Color.black.opacity(0.1) : Color.white)
         }
         .sheet(isPresented: $showAPIKeySetup) {
             APIKeySetupView()
@@ -271,6 +280,7 @@ struct ChatView: View {
 
 struct MessageBubbleView: View {
     let message: ChatMessage
+    @Environment(\.colorScheme) private var colorScheme
     
     var body: some View {
         HStack(alignment: .top) {
@@ -290,7 +300,7 @@ struct MessageBubbleView: View {
                 Text(message.content)
                     .padding()
                     .background(backgroundColor)
-                    .foregroundColor(message.role == .user ? .white : .primary)
+                    .foregroundColor(textColor)
                     .clipShape(RoundedRectangle(cornerRadius: 12))
                 
                 if let model = message.aiModel, message.role == .assistant {
@@ -312,11 +322,19 @@ struct MessageBubbleView: View {
     private var backgroundColor: Color {
         switch message.role {
         case .user:
-            return .blue
+            return Color.blue
         case .assistant:
-            return Color.gray.opacity(0.2)
+            return colorScheme == .dark ? Color.gray.opacity(0.5) : Color.gray.opacity(0.2)
         case .system:
-            return Color.blue.opacity(0.1)
+            return colorScheme == .dark ? Color.blue.opacity(0.3) : Color.blue.opacity(0.1)
+        }
+    }
+    
+    private var textColor: Color {
+        if message.role == .user {
+            return .white
+        } else {
+            return .primary
         }
     }
 }

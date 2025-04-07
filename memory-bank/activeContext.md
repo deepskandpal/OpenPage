@@ -110,6 +110,32 @@ The restructuring provides several benefits:
 - Eliminated duplicate code and resolved conflicting versions
 - Proper organization following Swift best practices
 
+### ✅ Dark Mode Support Improvements (COMPLETED)
+
+We've fixed inconsistent behavior with the system theme by implementing proper dark mode support throughout the application. Previously, when the system theme changed from light to dark, only some UI parts adapted properly while others (especially the inspector and chat views) remained in light mode, causing legibility issues like white text on white backgrounds.
+
+#### Improvements Made:
+1. **Direct Color Adaptations**
+   - Used built-in SwiftUI color schemes that automatically adapt to dark mode
+   - Implemented explicit dark/light color handling in all views
+   - Added `.colorScheme` environment variables to detect system theme
+
+2. **Inspector View Fixes**
+   - Updated `SimplestInspectorView` to use dynamic background colors
+   - Added explicit light/dark mode color handling for proper contrast
+
+3. **Chat Interface Improvements**
+   - Fixed message bubbles to properly adapt to dark mode
+   - Enhanced contrast for better readability in dark mode
+
+4. **System Integration**
+   - Ensured the app respects the system color scheme preferences
+   - Implemented proper dark mode transitions for all components
+
+**Note:** We initially encountered build errors with our first approach using AppKit color references. We resolved this by simplifying our approach to use direct SwiftUI colors with dark mode conditionals instead of relying on system color names.
+
+These changes ensure that the application has consistent appearance in both light and dark modes, improving usability and aesthetics.
+
 ### 🚨 Project Restructuring - Pending Xcode Project Creation
 
 After consolidating all source files, we need to create a new Xcode project to replace the old one:

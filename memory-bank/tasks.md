@@ -42,6 +42,11 @@
   - ✅ Added Conversation model to fix build error in OpenPageApp.swift
   - ✅ Fixed SweetPad/Cursor configuration to use new scheme name
   - 🔄 Pending: Final testing and verification of all features
+- ✅ **Fix dark mode inconsistencies** - COMPLETED
+  - Added adaptable color scheme support for inspector views
+  - Created centralized Color+Theme extension for app-wide color consistency
+  - Fixed white backgrounds in dark mode for chat and inspector views
+  - Ensured proper text color contrast in dark mode
 - **Design advanced metadata UI** - Create schema for extended document properties
   - Design Inspector panel mockups
   - Expand Document and DocumentSection models for additional metadata

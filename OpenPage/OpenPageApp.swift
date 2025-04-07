@@ -40,6 +40,7 @@ struct OpenPageApp: App {
                 .modelContainer(sharedModelContainer)
                 .frame(minWidth: 800, maxWidth: .infinity, minHeight: 600, maxHeight: .infinity)
                 .ignoresSafeArea(.all)
+                .preferredColorScheme(nil)
         }
         .windowStyle(.automatic)
         .windowToolbarStyle(.automatic)

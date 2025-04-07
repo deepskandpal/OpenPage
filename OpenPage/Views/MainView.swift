@@ -3,6 +3,7 @@ import SwiftData
 
 struct MainView: View {
     @Environment(\.modelContext) private var modelContext
+    @Environment(\.colorScheme) private var colorScheme
     @Query private var projects: [Project]
     @State private var isShowingSettings = false
     @State private var showingNewDocumentView = false
@@ -35,7 +36,7 @@ struct MainView: View {
     
     var body: some View {
         ZStack(alignment: .top) {
-            Color.white
+            Color(colorScheme == .dark ? .black : .white)
                 .edgesIgnoringSafeArea(.all) // Ensure background extends to all edges
             
             VStack(spacing: 0) {
@@ -92,7 +93,7 @@ struct MainView: View {
                             .layoutPriority(1)
                         }
                         .frame(minWidth: 220, idealWidth: 250, maxWidth: 300, maxHeight: .infinity, alignment: .top)
-                        .background(Color.gray.opacity(0.05))
+                        .background(Color.adaptiveBackground)
                     }
                     
                     // EDITOR PANEL (CENTER)
@@ -135,7 +136,7 @@ struct MainView: View {
                         
                         // Editor content
                         ZStack {
-                            Color.white
+                            Color(colorScheme == .dark ? .black : .white)
                                 .edgesIgnoringSafeArea(.all)
                             
                             if let document = selectedDocument {
@@ -210,7 +211,7 @@ struct MainView: View {
                             }
                         }
                         .frame(minWidth: 220, idealWidth: 250, maxWidth: 300, maxHeight: .infinity, alignment: .top)
-                        .background(Color.gray.opacity(0.05))
+                        .background(Color.white.opacity(colorScheme == .dark ? 0.1 : 1))
                     }
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)

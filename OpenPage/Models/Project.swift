@@ -11,7 +11,8 @@ final class Project {
     var icon: String?
     var isArchived: Bool
     
-    var documents: [Document]
+    @Relationship(deleteRule: .cascade, inverse: \Document.project)
+    var documents: [Document] = []
     
     var tags: [String]
     
@@ -32,7 +33,7 @@ final class Project {
         self.color = color
         self.icon = icon
         self.isArchived = isArchived
-        self.documents = documents
+        // Documents initialized as empty array
         self.tags = tags
     }
     

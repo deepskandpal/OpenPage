@@ -51,8 +51,8 @@ final class DocumentSection {
     // Metadata
     var metadata: SectionMetadata?
     
-    // Document relationship
-    var document: Document?
+    // Document relationship - remove to break circular reference
+    // Document ownership is established through rootSection relationship
     
     // Statistics
     var wordCount: Int
@@ -76,7 +76,7 @@ final class DocumentSection {
         self.isContainer = isContainer
         self.parent = parent
         self.sortOrder = sortOrder
-        self.document = document
+        // Document relationship removed
         self.children = isContainer ? [] : nil
         self.wordCount = content.split(separator: " ").count
         self.characterCount = content.count
@@ -124,7 +124,7 @@ final class DocumentSection {
         }
         
         section.parent = self
-        section.document = self.document
+        // Document relationship managed at root level
         
         // Find the highest sort order and place this one after
         if let children = children {
@@ -153,12 +153,9 @@ final class DocumentSection {
               let index = children.firstIndex(where: { $0.id == section.id }),
               index > 0 else { return }
         
-        // Get copies of the elements with their new sort orders
-        var childrenCopy = children
-        let previousOrder = childrenCopy[index - 1].sortOrder
-        
-        // Update the sort orders
-        childrenCopy[index - 1].sortOrder = section.sortOrder
+        // Swap sort orders directly
+        let previousOrder = children[index - 1].sortOrder
+        children[index - 1].sortOrder = section.sortOrder
         section.sortOrder = previousOrder
     }
     
@@ -167,12 +164,9 @@ final class DocumentSection {
               let index = children.firstIndex(where: { $0.id == section.id }),
               index < children.count - 1 else { return }
         
-        // Get copies of the elements with their new sort orders
-        var childrenCopy = children
-        let nextOrder = childrenCopy[index + 1].sortOrder
-        
-        // Update the sort orders
-        childrenCopy[index + 1].sortOrder = section.sortOrder
+        // Swap sort orders directly
+        let nextOrder = children[index + 1].sortOrder
+        children[index + 1].sortOrder = section.sortOrder
         section.sortOrder = nextOrder
     }
     

@@ -2,9 +2,11 @@ import Foundation
 import SwiftData
 import Combine
 
+@MainActor
 class DocumentViewModel: ObservableObject {
     private var document: Document
     private var cancellables = Set<AnyCancellable>()
+    private let documentService: DocumentService
     
     // Published properties for UI binding
     @Published var title: String
@@ -17,11 +19,11 @@ class DocumentViewModel: ObservableObject {
     // Editor state
     @Published var isEditing: Bool = false
     @Published var isDirty: Bool = false
-    @Published var autoSaveTimer: Timer?
     @Published var lastSavedDate: Date?
     
-    init(document: Document) {
+    init(document: Document, documentService: DocumentService) {
         self.document = document
+        self.documentService = documentService
         self.title = document.title
         self.content = document.content
         self.isFavorite = document.isFavorite
@@ -29,8 +31,9 @@ class DocumentViewModel: ObservableObject {
         self.wordCount = document.wordCount
         self.characterCount = document.characterCount
         
-        // Set up bindings
+        // Set up bindings and auto-save
         setupBindings()
+        documentService.startAutoSave(for: document)
     }
     
     private func setupBindings() {
@@ -67,7 +70,8 @@ class DocumentViewModel: ObservableObject {
         document.tags = tags
         document.wordCount = wordCount
         document.characterCount = characterCount
-        document.updatedAt = Date()
+        
+        documentService.saveDocument(document)
         
         // Reset dirty flag and update last saved date
         isDirty = false
@@ -78,16 +82,17 @@ class DocumentViewModel: ObservableObject {
         _ = document.createSnapshot()
     }
     
-    func startAutoSave(interval: TimeInterval) {
-        stopAutoSave()
-        autoSaveTimer = Timer.scheduledTimer(withTimeInterval: interval, repeats: true) { [weak self] _ in
-            guard let self = self, self.isDirty else { return }
-            self.saveDocument()
+    func configureAutoSave(enabled: Bool, interval: TimeInterval = 30.0) {
+        document.configureAutoSave(enabled: enabled, interval: interval)
+        
+        if enabled {
+            documentService.startAutoSave(for: document)
+        } else {
+            documentService.stopAutoSave(for: document)
         }
     }
     
-    func stopAutoSave() {
-        autoSaveTimer?.invalidate()
-        autoSaveTimer = nil
+    deinit {
+        documentService.stopAutoSave(for: document)
     }
 } 

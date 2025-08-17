@@ -1,13 +1,13 @@
 import Foundation
 import SwiftData
 
-// Forward reference to DocumentVersion
 @Model
 final class DocumentVersion {
     var content: String
     var timestamp: Date
     var wordCount: Int
     var notes: String?
+    var document: Document?
     
     init(content: String, timestamp: Date, wordCount: Int, notes: String? = nil) {
         self.content = content
@@ -43,24 +43,22 @@ final class Document {
     var lastWritingSession: Date?
     var timeSpentWriting: Int?  // In minutes
     
-    // Relationship with project
+    // Relationship with project - proper inverse relationship
     var project: Project?
     
-    // Version tracking
-    var versions: [DocumentVersion]?
+    // Version tracking - proper one-to-many relationship
+    @Relationship(deleteRule: .cascade, inverse: \DocumentVersion.document)
+    var versions: [DocumentVersion] = []
     
     // Formatting
     var fontName: String?
     var fontSize: Double?
     var themePreference: String?
-    var templateType: String?  // Stores which template was used
+    var templateType: String?
     
-    // Hierarchical document structure - new fields
+    // Hierarchical document structure - single root section owns all children
     @Relationship(deleteRule: .cascade)
     var rootSection: DocumentSection?
-    
-    @Relationship(deleteRule: .cascade)
-    var sections: [DocumentSection]?
     
     // Structure type
     var isHierarchical: Bool = false
@@ -69,9 +67,9 @@ final class Document {
     var isDirty: Bool = false
     var lastSavedDate: Date?
 
-    // Transient property (not stored in SwiftData)
-    @Transient
-    private var autoSaveTimer: Timer?
+    // Auto-save state (not the timer itself)
+    var autoSaveEnabled: Bool = true
+    var autoSaveInterval: TimeInterval = 30.0
     
     init(
         title: String = "Untitled",
@@ -98,7 +96,6 @@ final class Document {
         self.status = "draft"
         self.templateType = templateType
         self.isHierarchical = false
-        self.sections = []
     }
     
     func updateCounts() {
@@ -116,10 +113,8 @@ final class Document {
     func createSnapshot() -> DocumentVersion {
         let snapshotContent = isHierarchical ? (rootSection?.combinedContent ?? content) : content
         let snapshot = DocumentVersion(content: snapshotContent, timestamp: Date(), wordCount: self.wordCount)
-        if self.versions == nil {
-            self.versions = []
-        }
-        self.versions?.append(snapshot)
+        snapshot.document = self
+        self.versions.append(snapshot)
         return snapshot
     }
     
@@ -171,13 +166,6 @@ final class Document {
         // Setup document
         self.rootSection = root
         
-        if self.sections == nil {
-            self.sections = []
-        }
-        
-        self.sections?.append(root)
-        self.sections?.append(contentSection)
-        
         self.isHierarchical = true
         
         // Update counts
@@ -207,11 +195,7 @@ final class Document {
         // Add to parent
         actualParent?.addChild(newSection)
         
-        // Add to sections collection
-        if self.sections == nil {
-            self.sections = []
-        }
-        self.sections?.append(newSection)
+        // Section is now managed through the hierarchy
         
         // Update counts
         updateCounts()
@@ -236,16 +220,9 @@ final class Document {
         self.lastSavedDate = Date()
     }
     
-    func startAutoSave(interval: TimeInterval) {
-        stopAutoSave()
-        autoSaveTimer = Timer.scheduledTimer(withTimeInterval: interval, repeats: true) { [weak self] _ in
-            guard let self = self, self.isDirty else { return }
-            self.saveDocument()
-        }
-    }
-    
-    func stopAutoSave() {
-        autoSaveTimer?.invalidate()
-        autoSaveTimer = nil
+    // Auto-save configuration - timer management moved to DocumentService
+    func configureAutoSave(enabled: Bool, interval: TimeInterval = 30.0) {
+        self.autoSaveEnabled = enabled
+        self.autoSaveInterval = interval
     }
 } 

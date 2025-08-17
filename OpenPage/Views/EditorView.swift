@@ -34,7 +34,7 @@ struct EditorView: View {
                 Spacer()
                 
                 // Convert to hierarchical button if not already hierarchical
-                if document.sections?.isEmpty ?? true {
+                if !document.isHierarchical {
                     Button("Convert to Hierarchical") {
                         document.convertToHierarchical()
                     }
@@ -93,7 +93,7 @@ struct EditorView: View {
             }
             
             // Main editor area
-            if document.sections?.isEmpty ?? true || !settingsViewModel.useHierarchicalEditing {
+            if !document.isHierarchical || !settingsViewModel.useHierarchicalEditing {
                 // Use traditional editor when document has no sections or hierarchical editing is disabled
                 if selectedTab == "edit" {
                     TextEditor(text: $documentContent)

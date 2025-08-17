@@ -28,15 +28,18 @@ class APIKeyManager {
     enum APIProvider: String, CaseIterable, Identifiable {
         case claude = "claude"
         case openai = "openai"
+        case gemini = "gemini"
         
         var id: String { self.rawValue }
         
         var displayName: String {
             switch self {
             case .claude:
-                return "Claude"
+                return "Claude (Anthropic)"
             case .openai:
-                return "OpenAI"
+                return "GPT (OpenAI)"
+            case .gemini:
+                return "Gemini (Google)"
             }
         }
         
@@ -46,6 +49,8 @@ class APIKeyManager {
                 return "sk-ant-"
             case .openai:
                 return "sk-"
+            case .gemini:
+                return "AIza"
             }
         }
         
@@ -55,6 +60,8 @@ class APIKeyManager {
                 return "Claude API keys start with 'sk-ant-'"
             case .openai:
                 return "OpenAI API keys start with 'sk-'"
+            case .gemini:
+                return "Gemini API keys start with 'AIza'"
             }
         }
     }
@@ -169,6 +176,8 @@ class APIKeyManager {
             return key.hasPrefix("sk-ant-")
         case .openai:
             return key.hasPrefix("sk-")
+        case .gemini:
+            return key.hasPrefix("AIza")
         }
     }
     

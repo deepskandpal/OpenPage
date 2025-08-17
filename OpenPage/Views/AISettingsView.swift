@@ -9,7 +9,7 @@ struct AISettingsView: View {
         Form {
             Section(header: Text("AI Features")) {
                 Toggle("Enable AI Assistance", isOn: $settingsViewModel.aiAssistEnabled)
-                    .onChange(of: settingsViewModel.aiAssistEnabled) { newValue in
+                    .onChange(of: settingsViewModel.aiAssistEnabled) { oldValue, newValue in
                         if newValue && !hasAnyAPIKey() {
                             showingAPIKeySetup = true
                         }

@@ -71,7 +71,7 @@ struct HierarchicalEditorView: View {
                             .font(.caption)
                             .foregroundColor(.secondary)
                         
-                        if let target = document.targetWordCount {
+                        if document.targetWordCount != nil {
                             ProgressView(value: document.wordCountProgress)
                                 .progressViewStyle(.linear)
                                 .frame(width: 100)
@@ -103,19 +103,37 @@ struct HierarchicalEditorView: View {
                 }
             }
         }
-        .onChange(of: selectedSectionId) { id in
-            if let id = id, let sections = document.sections {
-                currentSection = sections.first(where: { $0.id == id })
+        .onChange(of: selectedSectionId) { oldValue, newValue in
+            if let id = newValue, let rootSection = document.rootSection {
+                // Find the section with the matching ID in the hierarchical structure
+                currentSection = findSection(with: id, in: rootSection)
             } else {
                 currentSection = nil
             }
         }
-        .onChange(of: document.isHierarchical) { isHierarchical in
-            if isHierarchical, let rootSection = document.rootSection {
+        .onChange(of: document.isHierarchical) { oldValue, newValue in
+            if newValue, let rootSection = document.rootSection {
                 selectedSectionId = rootSection.id
             }
         }
         .navigationTitle(document.title)
+    }
+    
+    // Helper function to find a section by ID in the hierarchical structure
+    private func findSection(with id: UUID, in section: DocumentSection) -> DocumentSection? {
+        if section.id == id {
+            return section
+        }
+        
+        if let children = section.children {
+            for child in children {
+                if let found = findSection(with: id, in: child) {
+                    return found
+                }
+            }
+        }
+        
+        return nil
     }
 }
 
@@ -160,9 +178,9 @@ struct SectionEditor: View {
                 .focused($isEditorFocused)
                 .font(.body)
                 .padding()
-                .onChange(of: localContent) { _ in
+                .onChange(of: localContent) { oldValue, newValue in
                     // Update section content in the model context
-                    section.content = localContent
+                    section.content = newValue
                     section.updateCounts()
                 }
         }
@@ -212,8 +230,8 @@ struct NonHierarchicalEditor: View {
             TextEditor(text: $localContent)
                 .font(.body)
                 .padding()
-                .onChange(of: localContent) { _ in
-                    document.content = localContent
+                .onChange(of: localContent) { oldValue, newValue in
+                    document.content = newValue
                     document.updateCounts()
                 }
                 .onAppear {

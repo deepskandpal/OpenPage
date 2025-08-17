@@ -81,7 +81,7 @@ class LLMService {
             case 200:
                 do {
                     let decoder = JSONDecoder()
-                    let result = try decoder.decode(ClaudeResponse.self, from: data)
+                    let result = try decoder.decode(LegacyClaudeResponse.self, from: data)
                     guard let text = result.content.first?.text, !text.isEmpty else {
                         throw LLMError.emptyResponse
                     }
@@ -110,12 +110,12 @@ class LLMService {
     }
 }
 
-// Response models for Claude API
-struct ClaudeResponse: Codable {
-    let content: [ClaudeContent]
+// Legacy response models - keeping for backward compatibility
+struct LegacyClaudeResponse: Codable {
+    let content: [LegacyClaudeContent]
 }
 
-struct ClaudeContent: Codable {
+struct LegacyClaudeContent: Codable {
     let text: String
     let type: String
 } 

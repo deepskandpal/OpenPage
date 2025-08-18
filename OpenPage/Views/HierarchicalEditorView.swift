@@ -173,16 +173,16 @@ struct SectionEditor: View {
             .padding()
             .background(Color.secondary.opacity(0.1))
             
-            // Text editor
-            TextEditor(text: $localContent)
-                .focused($isEditorFocused)
-                .font(.body)
-                .padding()
-                .onChange(of: localContent) { oldValue, newValue in
-                    // Update section content in the model context
-                    section.content = newValue
-                    section.updateCounts()
-                }
+            // Modern text editor with formatting toolbar
+            ModernEditorView(
+                content: $localContent,
+                focusMode: .constant(.normal)
+            )
+            .onChange(of: localContent) { oldValue, newValue in
+                // Update section content in the model context
+                section.content = newValue
+                section.updateCounts()
+            }
         }
         .onAppear {
             // Ensure local content is synced with section
@@ -226,17 +226,16 @@ struct NonHierarchicalEditor: View {
     }
     
     var body: some View {
-        VStack {
-            TextEditor(text: $localContent)
-                .font(.body)
-                .padding()
-                .onChange(of: localContent) { oldValue, newValue in
-                    document.content = newValue
-                    document.updateCounts()
-                }
-                .onAppear {
-                    localContent = document.content
-                }
+        ModernEditorView(
+            content: $localContent,
+            focusMode: .constant(.normal)
+        )
+        .onChange(of: localContent) { oldValue, newValue in
+            document.content = newValue
+            document.updateCounts()
+        }
+        .onAppear {
+            localContent = document.content
         }
     }
 }

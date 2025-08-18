@@ -35,46 +35,35 @@ struct EditorView: View {
             // Main Editor Area
             Group {
                 if !document.isHierarchical {
-                    // Hybrid flat document editor - reliable TextEditor with simple toolbar
-                    VStack(spacing: 0) {
-                        // Simple formatting toolbar
-                        SimpleEditorToolbar(content: documentContent)
-                        
-                        // Reliable text editor
-                        if selectedTab == "edit" {
-                            TextEditor(text: $documentContent)
-                                .font(.system(size: 16, design: .monospaced))
-                                .focused($isEditorFocused)
-                                .padding(16)
-                                .background(Color(.textBackgroundColor))
-                                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                                .onChange(of: documentContent) { oldValue, newValue in
-                                    document.content = newValue
-                                    document.updateCounts()
-                                    isDirty = true
-                                }
-                        } else if selectedTab == "preview" {
-                            MarkdownPreviewView(content: documentContent)
-                        } else {
-                            // Split view
-                            HSplitView {
-                                TextEditor(text: $documentContent)
-                                    .font(.system(size: 16, design: .monospaced))
-                                    .focused($isEditorFocused)
-                                    .padding(16)
-                                    .background(Color(.textBackgroundColor))
-                                    .frame(maxWidth: .infinity, maxHeight: .infinity)
-                                    .onChange(of: documentContent) { oldValue, newValue in
-                                        document.content = newValue
-                                        document.updateCounts()
-                                        isDirty = true
-                                    }
-                                
-                                MarkdownPreviewView(content: documentContent)
+                    // Modern editor with full formatting functionality
+                    if selectedTab == "edit" {
+                        ModernEditorView(
+                            content: $documentContent,
+                            focusMode: .constant(.normal)
+                        )
+                        .onChange(of: documentContent) { oldValue, newValue in
+                            document.content = newValue
+                            document.updateCounts()
+                            isDirty = true
+                        }
+                    } else if selectedTab == "preview" {
+                        MarkdownPreviewView(content: documentContent)
+                    } else {
+                        // Split view - use modern editor on left
+                        HSplitView {
+                            ModernEditorView(
+                                content: $documentContent,
+                                focusMode: .constant(.normal)
+                            )
+                            .onChange(of: documentContent) { oldValue, newValue in
+                                document.content = newValue
+                                document.updateCounts()
+                                isDirty = true
                             }
+                            
+                            MarkdownPreviewView(content: documentContent)
                         }
                     }
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
                 } else {
                     // Hierarchical document editor
                     HierarchicalEditorView(document: document, selectedSectionId: $selectedSectionId)

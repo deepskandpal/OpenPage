@@ -11,7 +11,7 @@ struct ModernEditorView: View {
     @State private var lineHeight: Double = 1.6
     @State private var showWordCount: Bool = true
     @State private var showReadingTime: Bool = true
-    @State private var isMarkdownMode: Bool = true
+    @State private var isMarkdownMode: Bool = true // Default to markdown for better rendering
     @State private var showToolbar: Bool = true
     
     @FocusState private var isEditorFocused: Bool
@@ -53,38 +53,17 @@ struct ModernEditorView: View {
                 editorTheme.backgroundColor
                     .ignoresSafeArea()
                 
-                // Editor Content
-                GeometryReader { geometry in
-                    ScrollViewReader { proxy in
-                        ScrollView {
-                            VStack(spacing: 0) {
-                                // Top padding for typewriter mode
-                                if focusMode == .typewriter {
-                                    Spacer()
-                                        .frame(height: geometry.size.height * 0.4)
-                                }
-                                
-                                // Text Editor
-                                ModernTextEditor(
-                                    content: $content,
-                                    theme: editorTheme,
-                                    fontSize: fontSize,
-                                    lineHeight: lineHeight,
-                                    isMarkdownMode: isMarkdownMode,
-                                    focusMode: focusMode,
-                                    isEditorFocused: $isEditorFocused
-                                )
-                                .padding(.horizontal, editorHorizontalPadding)
-                                
-                                // Bottom padding for typewriter mode
-                                if focusMode == .typewriter {
-                                    Spacer()
-                                        .frame(height: geometry.size.height * 0.4)
-                                }
-                            }
-                        }
-                    }
-                }
+                // Editor Content - Simplified layout
+                ModernTextEditor(
+                    content: $content,
+                    theme: editorTheme,
+                    fontSize: fontSize,
+                    lineHeight: lineHeight,
+                    isMarkdownMode: isMarkdownMode,
+                    focusMode: focusMode,
+                    isEditorFocused: $isEditorFocused
+                )
+                .padding(.horizontal, editorHorizontalPadding)
             }
             
             // Status Bar
@@ -142,43 +121,11 @@ struct ModernEditorView: View {
     }
     
     private func handleFormatting(_ action: FormattingAction) {
-        // Handle rich text formatting actions
-        switch action {
-        case .bold:
-            insertMarkdownFormatting("**", "**")
-        case .italic:
-            insertMarkdownFormatting("*", "*")
-        case .strikethrough:
-            insertMarkdownFormatting("~~", "~~")
-        case .code:
-            insertMarkdownFormatting("`", "`")
-        case .link:
-            insertMarkdownFormatting("[", "](url)")
-        case .header1:
-            insertLinePrefix("# ")
-        case .header2:
-            insertLinePrefix("## ")
-        case .header3:
-            insertLinePrefix("### ")
-        case .bulletList:
-            insertLinePrefix("- ")
-        case .numberedList:
-            insertLinePrefix("1. ")
-        case .quote:
-            insertLinePrefix("> ")
-        }
-    }
-    
-    private func insertMarkdownFormatting(_ prefix: String, _ suffix: String) {
-        // Implementation would depend on NSTextView integration for cursor position
-        content += prefix + "text" + suffix
-    }
-    
-    private func insertLinePrefix(_ prefix: String) {
-        // Implementation would depend on NSTextView integration for current line
-        content += "\n" + prefix
+        print("DEBUG: ModernEditorView.handleFormatting called with: \(action)")
+        FormattingService.shared.applyFormatting(action)
     }
 }
+
 
 // MARK: - Editor Theme
 
@@ -259,7 +206,7 @@ enum EditorTheme: String, CaseIterable {
 
 // MARK: - Formatting Actions
 
-enum FormattingAction {
+enum FormattingAction: Hashable {
     case bold, italic, strikethrough, code, link
     case header1, header2, header3
     case bulletList, numberedList, quote

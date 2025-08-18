@@ -13,14 +13,42 @@ struct ModernTextEditor: NSViewRepresentable {
     
     func makeNSView(context: Context) -> NSScrollView {
         let scrollView = NSScrollView()
-        let textView = ModernNSTextView(frame: .zero, textContainer: nil)
+        print("DEBUG: makeNSView initial scrollView frame: \(scrollView.frame)")
         
-        // Configure text view
+        // Create text container and layout manager explicitly
+        let textContainer = NSTextContainer()
+        let layoutManager = NSLayoutManager()
+        let textStorage = NSTextStorage()
+        
+        // Set up the text system components
+        textStorage.addLayoutManager(layoutManager)
+        layoutManager.addTextContainer(textContainer)
+        
+        let textView = ModernNSTextView(frame: .zero, textContainer: textContainer)
+        
+        // Configure text view - be very explicit about editability
         textView.delegate = context.coordinator
         textView.isRichText = false
         textView.isEditable = true
         textView.isSelectable = true
         textView.allowsUndo = true
+        textView.drawsBackground = true
+        // Set initial background - will be updated by theme in updateTextViewAppearance
+        textView.backgroundColor = NSColor(theme.backgroundColor)
+        textView.insertionPointColor = NSColor(theme.accentColor)
+        
+        // Set cursor width to match font size
+        if let layoutManager = textView.layoutManager {
+            layoutManager.showsInvisibleCharacters = false
+            layoutManager.showsControlCharacters = false
+        }
+        
+        // Ensure cursor is visible
+        textView.displaysLinkToolTips = true
+        
+        // Ensure notifications are sent for text changes
+        textView.isAutomaticTextCompletionEnabled = true
+        textView.textStorage?.delegate = context.coordinator
         textView.isAutomaticQuoteSubstitutionEnabled = true
         textView.isAutomaticDashSubstitutionEnabled = true
         textView.isAutomaticTextReplacementEnabled = true
@@ -31,27 +59,79 @@ struct ModernTextEditor: NSViewRepresentable {
         textView.usesFindBar = true
         textView.string = content
         
-        // Configure text container
+        // Set initial typing attributes to ensure text is visible when typed
+        let initialParagraphStyle = NSMutableParagraphStyle()
+        initialParagraphStyle.lineHeightMultiple = CGFloat(lineHeight)
+        initialParagraphStyle.lineSpacing = 4
+        
+        textView.typingAttributes = [
+            .font: NSFont.systemFont(ofSize: CGFloat(fontSize), weight: .regular),
+            .foregroundColor: NSColor.labelColor,
+            .paragraphStyle: initialParagraphStyle
+        ]
+        
+        // Configure text container with proper sizing
         textView.textContainer?.widthTracksTextView = true
-        textView.textContainer?.containerSize = NSSize(width: 0, height: CGFloat.greatestFiniteMagnitude)
+        textView.textContainer?.heightTracksTextView = false
+        textView.textContainer?.containerSize = NSSize(width: 1000, height: CGFloat.greatestFiniteMagnitude)
         textView.isVerticallyResizable = true
         textView.isHorizontallyResizable = false
         textView.maxSize = NSSize(width: CGFloat.greatestFiniteMagnitude, height: CGFloat.greatestFiniteMagnitude)
+        textView.minSize = NSSize(width: 0, height: 0)
         
-        // Configure scroll view
+        // Set a reasonable frame to start with
+        textView.frame = NSRect(x: 0, y: 0, width: 1000, height: 400)
+        
+        // Ensure text view can receive events
+        textView.needsLayout = true
+        textView.layoutSubtreeIfNeeded()
+        
+        // Configure scroll view with proper size
         scrollView.hasVerticalScroller = true
         scrollView.hasHorizontalScroller = false
         scrollView.documentView = textView
         scrollView.borderType = .noBorder
         
+        // Set a minimum frame size for the scroll view
+        scrollView.frame = NSRect(x: 0, y: 0, width: 1000, height: 400)
+        print("DEBUG: makeNSView set scrollView frame to: \(scrollView.frame)")
+        
+        // Add tap gesture to ensure focus
+        let tapGesture = NSClickGestureRecognizer(target: context.coordinator, action: #selector(context.coordinator.handleTap))
+        scrollView.addGestureRecognizer(tapGesture)
+        
         // Store references
         context.coordinator.textView = textView
         context.coordinator.scrollView = scrollView
         
-        // Defer focus until the text view is fully set up
+        // Register with formatting service
+        print("DEBUG: ModernTextEditor about to register textView")
+        FormattingService.shared.registerTextView(textView) { [weak textView] newContent in
+            guard textView?.string != newContent else { return }
+            DispatchQueue.main.async {
+                content = newContent
+            }
+        }
+        
+        // Force the text view to become first responder immediately
+        DispatchQueue.main.async {
+            if let window = scrollView.window {
+                print("DEBUG: Making textView first responder immediately")
+                let success = window.makeFirstResponder(textView)
+                print("DEBUG: Initial makeFirstResponder success: \(success)")
+            }
+        }
+        
+        // Also try again after a delay
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-            if textView.superview != nil {
-                textView.window?.makeFirstResponder(textView)
+            if let window = textView.window ?? textView.superview?.window {
+                print("DEBUG: Attempting to make textView first responder - delayed")
+                let success = window.makeFirstResponder(textView)
+                print("DEBUG: Delayed makeFirstResponder success: \(success)")
+                print("DEBUG: Current first responder: \(String(describing: window.firstResponder))")
+                print("DEBUG: TextView isEditable: \(textView.isEditable)")
+                print("DEBUG: TextView acceptsFirstResponder: \(textView.acceptsFirstResponder)")
+                print("DEBUG: TextView in view hierarchy properly")
             }
         }
         
@@ -66,6 +146,27 @@ struct ModernTextEditor: NSViewRepresentable {
             textView.string = content
         }
         
+        // Ensure proper sizing
+        let scrollViewFrame = nsView.frame
+        print("DEBUG: updateNSView scrollViewFrame: \(scrollViewFrame)")
+        if scrollViewFrame.width > 0 {
+            let containerWidth = scrollViewFrame.width - 40 // Account for padding
+            let frameWidth = containerWidth > 0 ? containerWidth : 800
+            
+            textView.textContainer?.containerSize = NSSize(
+                width: frameWidth,
+                height: CGFloat.greatestFiniteMagnitude
+            )
+            textView.frame = NSRect(
+                x: 0, 
+                y: 0, 
+                width: frameWidth, 
+                height: max(scrollViewFrame.height, 400)
+            )
+            print("DEBUG: Set textView frame to: \(textView.frame)")
+            print("DEBUG: Set container size to: \(textView.textContainer?.containerSize ?? NSSize.zero)")
+        }
+        
         // Update styling
         updateTextViewAppearance(textView)
         
@@ -78,11 +179,16 @@ struct ModernTextEditor: NSViewRepresentable {
                 textView.window?.makeFirstResponder(textView)
             }
         }
+        
+        // Force layout update
+        textView.needsLayout = true
+        textView.needsDisplay = true
     }
     
     func makeCoordinator() -> Coordinator {
         Coordinator(self)
     }
+    
     
     private func updateTextViewAppearance(_ textView: ModernNSTextView) {
         // Create paragraph style with line height
@@ -90,10 +196,11 @@ struct ModernTextEditor: NSViewRepresentable {
         paragraphStyle.lineHeightMultiple = CGFloat(lineHeight)
         paragraphStyle.lineSpacing = 4
         
-        // Create text attributes
+        // Create text attributes with explicit text color
+        let textColor = NSColor.labelColor // Use system label color for better contrast
         let attributes: [NSAttributedString.Key: Any] = [
             .font: NSFont.systemFont(ofSize: CGFloat(fontSize), weight: .regular),
-            .foregroundColor: NSColor(theme.textColor),
+            .foregroundColor: textColor,
             .paragraphStyle: paragraphStyle
         ]
         
@@ -101,9 +208,25 @@ struct ModernTextEditor: NSViewRepresentable {
         let range = NSRange(location: 0, length: textView.string.count)
         textView.textStorage?.addAttributes(attributes, range: range)
         
-        // Update background color
-        textView.backgroundColor = NSColor(theme.backgroundColor)
-        textView.insertionPointColor = NSColor(theme.accentColor)
+        // Update background color and ensure proper cursor visibility
+        DispatchQueue.main.async {
+            textView.backgroundColor = NSColor(theme.backgroundColor)
+            textView.insertionPointColor = NSColor(theme.accentColor)
+            textView.needsDisplay = true
+        }
+        
+        // Configure selection appearance
+        textView.selectedTextAttributes = [
+            .backgroundColor: NSColor(theme.accentColor.opacity(0.3)),
+            .foregroundColor: NSColor.labelColor
+        ]
+        
+        // Set default typing attributes to ensure new text is visible
+        textView.typingAttributes = [
+            .font: NSFont.systemFont(ofSize: CGFloat(fontSize), weight: .regular),
+            .foregroundColor: NSColor.labelColor,
+            .paragraphStyle: paragraphStyle
+        ]
         
         // Apply markdown highlighting if enabled
         if isMarkdownMode {
@@ -170,7 +293,7 @@ struct ModernTextEditor: NSViewRepresentable {
     
     // MARK: - Coordinator
     
-    class Coordinator: NSObject, NSTextViewDelegate {
+    class Coordinator: NSObject, NSTextViewDelegate, NSTextStorageDelegate {
         let parent: ModernTextEditor
         var textView: ModernNSTextView?
         var scrollView: NSScrollView?
@@ -180,12 +303,27 @@ struct ModernTextEditor: NSViewRepresentable {
             super.init()
         }
         
+        deinit {
+            // Unregister from formatting service
+            if let textView = textView {
+                FormattingService.shared.unregisterTextView(textView)
+            }
+        }
+        
+        
         func textDidChange(_ notification: Notification) {
             guard let textView = notification.object as? NSTextView else { return }
             
-            DispatchQueue.main.async {
-                self.parent.content = textView.string
-            }
+            print("DEBUG: textDidChange called - textView.string: '\(textView.string)'")
+            print("DEBUG: textDidChange - parent.content before: '\(parent.content)'")
+            
+            // Update the SwiftUI binding immediately
+            parent.content = textView.string
+            print("DEBUG: textDidChange - parent.content after: '\(parent.content)'")
+            
+            // Force immediate display refresh
+            textView.needsDisplay = true
+            textView.needsLayout = true
             
             // Apply syntax highlighting with debouncing
             NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(applySyntaxHighlighting), object: nil)
@@ -195,6 +333,20 @@ struct ModernTextEditor: NSViewRepresentable {
         @objc private func applySyntaxHighlighting() {
             guard let textView = textView else { return }
             parent.updateTextViewAppearance(textView)
+        }
+        
+        // MARK: - NSTextStorageDelegate
+        
+        func textStorage(_ textStorage: NSTextStorage, didProcessEditing editedMask: NSTextStorageEditActions, range editedRange: NSRange, changeInLength delta: Int) {
+            print("DEBUG: textStorage didProcessEditing - new string: '\(textStorage.string)'")
+            
+            DispatchQueue.main.async {
+                self.parent.content = textStorage.string
+                print("DEBUG: Updated parent.content to: '\(self.parent.content)'")
+                
+                // Force display refresh to ensure text is visible
+                self.textView?.needsDisplay = true
+            }
         }
         
         func textViewDidChangeSelection(_ notification: Notification) {
@@ -227,6 +379,12 @@ struct ModernTextEditor: NSViewRepresentable {
                 scrollView?.hasVerticalScroller = true
                 scrollView?.hasHorizontalScroller = false
             }
+        }
+        
+        @objc func handleTap() {
+            guard let textView = textView else { return }
+            print("DEBUG: Tap detected, making textView first responder")
+            textView.window?.makeFirstResponder(textView)
         }
         
         private func centerCurrentLine() {
@@ -286,40 +444,100 @@ class ModernNSTextView: NSTextView {
         isRichText = false
         importsGraphics = false
         
-        // Configure text container
+        // Configure text container with proper sizing
         textContainer?.widthTracksTextView = true
         textContainer?.heightTracksTextView = false
         
         // Line numbering and better wrapping
         isVerticallyResizable = true
         isHorizontallyResizable = false
-        textContainer?.containerSize = NSSize(width: frame.width, height: CGFloat.greatestFiniteMagnitude)
+        
+        // Set container size - use reasonable default if frame is not set
+        let containerWidth = frame.width > 0 ? frame.width : 800
+        textContainer?.containerSize = NSSize(width: containerWidth, height: CGFloat.greatestFiniteMagnitude)
+        
+        // Ensure proper min/max sizes
+        minSize = NSSize(width: 0, height: 0)
+        maxSize = NSSize(width: CGFloat.greatestFiniteMagnitude, height: CGFloat.greatestFiniteMagnitude)
     }
     
     override var acceptsFirstResponder: Bool {
+        print("DEBUG: ModernNSTextView acceptsFirstResponder called - returning true")
         return true
     }
     
+    
+    override func becomeFirstResponder() -> Bool {
+        print("DEBUG: ModernNSTextView becomeFirstResponder called")
+        let result = super.becomeFirstResponder()
+        print("DEBUG: ModernNSTextView becomeFirstResponder result: \(result)")
+        if result {
+            // Ensure the text view is ready for input and cursor is visible
+            needsDisplay = true
+            updateInsertionPointStateAndRestartTimer(true)
+            
+            // Force cursor to be visible with proper styling
+            insertionPointColor = .controlAccentColor
+        }
+        return result
+    }
+    
+    override func mouseDown(with event: NSEvent) {
+        super.mouseDown(with: event)
+        // Ensure this text view becomes first responder when clicked
+        window?.makeFirstResponder(self)
+        print("DEBUG: ModernNSTextView mouseDown - making first responder")
+    }
+    
     override func keyDown(with event: NSEvent) {
-        // Handle special key combinations
+        print("DEBUG: ModernNSTextView keyDown received: \(event.charactersIgnoringModifiers ?? "nil")")
+        print("DEBUG: Current string length: \(string.count)")
+        
+        // Always call super to handle text input
+        super.keyDown(with: event)
+        
+        print("DEBUG: String length after super.keyDown: \(string.count)")
+        
+        // Force immediate display refresh after text input
+        needsDisplay = true
+        needsLayout = true
+        
+        // Handle special key combinations AFTER normal text processing
         if event.modifierFlags.contains(.command) {
             switch event.charactersIgnoringModifiers {
             case "b":
                 let currentRange = selectedRange()
-                replaceCharacters(in: currentRange, with: "****")
-                setSelectedRange(NSRange(location: currentRange.location + 2, length: 0))
+                replaceCharacters(in: currentRange, with: "**BOLD**")
+                setSelectedRange(NSRange(location: currentRange.location + 2, length: 4))
+                needsDisplay = true
                 return
             case "i":
                 let currentRange = selectedRange()
-                replaceCharacters(in: currentRange, with: "**")
-                setSelectedRange(NSRange(location: currentRange.location + 1, length: 0))
+                replaceCharacters(in: currentRange, with: "*ITALIC*")
+                setSelectedRange(NSRange(location: currentRange.location + 1, length: 6))
+                needsDisplay = true
                 return
             default:
                 break
             }
         }
+    }
+    
+    override func drawInsertionPoint(in rect: NSRect, color: NSColor, turnedOn flag: Bool) {
+        // Get current font to calculate proper cursor height
+        let font = self.font ?? NSFont.systemFont(ofSize: 16)
+        let cursorWidth: CGFloat = 1.0 // Thin cursor like modern editors
+        let cursorHeight = font.pointSize + 2 // Slightly taller than font
         
-        super.keyDown(with: event)
+        // Center the cursor vertically in the line
+        let centeredRect = NSRect(
+            x: rect.origin.x,
+            y: rect.origin.y + (rect.height - cursorHeight) / 2,
+            width: cursorWidth,
+            height: cursorHeight
+        )
+        
+        super.drawInsertionPoint(in: centeredRect, color: color, turnedOn: flag)
     }
 }
 
@@ -331,3 +549,4 @@ extension NSFont {
         return NSFont(descriptor: descriptor, size: pointSize) ?? self
     }
 }
+

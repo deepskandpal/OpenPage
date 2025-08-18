@@ -10,6 +10,10 @@ struct EditorToolbar: View {
     
     @State private var showThemePopover: Bool = false
     @State private var showFontPopover: Bool = false
+    @State private var activeFormats: Set<FormattingAction> = []
+    
+    // Timer to update active formatting states
+    let timer = Timer.publish(every: 0.5, on: .main, in: .common).autoconnect()
     
     var body: some View {
         HStack(spacing: 16) {
@@ -18,30 +22,35 @@ struct EditorToolbar: View {
                 FormattingButton(
                     icon: "bold",
                     tooltip: "Bold (⌘B)",
+                    isActive: activeFormats.contains(.bold),
                     action: { onFormat(.bold) }
                 )
                 
                 FormattingButton(
                     icon: "italic",
                     tooltip: "Italic (⌘I)",
+                    isActive: activeFormats.contains(.italic),
                     action: { onFormat(.italic) }
                 )
                 
                 FormattingButton(
                     icon: "strikethrough",
                     tooltip: "Strikethrough",
+                    isActive: activeFormats.contains(.strikethrough),
                     action: { onFormat(.strikethrough) }
                 )
                 
                 FormattingButton(
                     icon: "curlybraces",
                     tooltip: "Inline Code",
+                    isActive: activeFormats.contains(.code),
                     action: { onFormat(.code) }
                 )
                 
                 FormattingButton(
                     icon: "link",
                     tooltip: "Insert Link",
+                    isActive: activeFormats.contains(.link),
                     action: { onFormat(.link) }
                 )
             }
@@ -54,18 +63,21 @@ struct EditorToolbar: View {
                 FormattingButton(
                     text: "H1",
                     tooltip: "Heading 1",
+                    isActive: activeFormats.contains(.header1),
                     action: { onFormat(.header1) }
                 )
                 
                 FormattingButton(
                     text: "H2",
                     tooltip: "Heading 2",
+                    isActive: activeFormats.contains(.header2),
                     action: { onFormat(.header2) }
                 )
                 
                 FormattingButton(
                     text: "H3",
                     tooltip: "Heading 3",
+                    isActive: activeFormats.contains(.header3),
                     action: { onFormat(.header3) }
                 )
             }
@@ -78,18 +90,21 @@ struct EditorToolbar: View {
                 FormattingButton(
                     icon: "list.bullet",
                     tooltip: "Bullet List",
+                    isActive: activeFormats.contains(.bulletList),
                     action: { onFormat(.bulletList) }
                 )
                 
                 FormattingButton(
                     icon: "list.number",
                     tooltip: "Numbered List",
+                    isActive: activeFormats.contains(.numberedList),
                     action: { onFormat(.numberedList) }
                 )
                 
                 FormattingButton(
                     icon: "quote.bubble",
                     tooltip: "Quote Block",
+                    isActive: activeFormats.contains(.quote),
                     action: { onFormat(.quote) }
                 )
             }
@@ -161,6 +176,26 @@ struct EditorToolbar: View {
                 .foregroundColor(theme.secondaryTextColor.opacity(0.3)),
             alignment: .bottom
         )
+        .onReceive(timer) { _ in
+            updateActiveFormats()
+        }
+    }
+    
+    private func updateActiveFormats() {
+        let allActions: [FormattingAction] = [
+            .bold, .italic, .strikethrough, .code, .link,
+            .header1, .header2, .header3,
+            .bulletList, .numberedList, .quote
+        ]
+        
+        var newActiveFormats: Set<FormattingAction> = []
+        for action in allActions {
+            if FormattingService.shared.isFormattingActive(action) {
+                newActiveFormats.insert(action)
+            }
+        }
+        
+        activeFormats = newActiveFormats
     }
 }
 
@@ -170,19 +205,22 @@ struct FormattingButton: View {
     let icon: String?
     let text: String?
     let tooltip: String
+    let isActive: Bool
     let action: () -> Void
     
-    init(icon: String, tooltip: String, action: @escaping () -> Void) {
+    init(icon: String, tooltip: String, isActive: Bool = false, action: @escaping () -> Void) {
         self.icon = icon
         self.text = nil
         self.tooltip = tooltip
+        self.isActive = isActive
         self.action = action
     }
     
-    init(text: String, tooltip: String, action: @escaping () -> Void) {
+    init(text: String, tooltip: String, isActive: Bool = false, action: @escaping () -> Void) {
         self.icon = nil
         self.text = text
         self.tooltip = tooltip
+        self.isActive = isActive
         self.action = action
     }
     
@@ -198,12 +236,13 @@ struct FormattingButton: View {
                 }
             }
             .frame(width: 24, height: 24)
+            .foregroundColor(isActive ? .white : .primary)
         }
         .buttonStyle(.borderless)
         .help(tooltip)
         .background(
             RoundedRectangle(cornerRadius: 4)
-                .fill(Color.clear)
+                .fill(isActive ? Color.accentColor : Color.clear)
         )
         .onHover { isHovered in
             // Add hover effect if needed

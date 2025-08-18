@@ -70,7 +70,7 @@ struct MainView_Previews: PreviewProvider {
         
         // Add some sample data
         let project = Project(name: "Sample Project", projectDescription: "A sample project")
-        let document = Document(title: "Welcome", content: "# Welcome to Vibe Writing\n\nThis is your first document.")
+        let document = Document(title: "Welcome", content: "# Welcome to OpenPage\n\nThis is your first document.")
         project.addDocument(document)
         container.mainContext.insert(project)
         

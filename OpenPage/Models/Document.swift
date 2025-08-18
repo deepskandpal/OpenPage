@@ -24,7 +24,7 @@ final class Document {
     var content: String
     var createdAt: Date
     var updatedAt: Date
-    var tags: [String]
+    var tags: [String] = []
     
     // Metadata
     var isFavorite: Bool
@@ -147,8 +147,7 @@ final class Document {
             title: self.title,
             content: "",
             type: "root",
-            isContainer: true,
-            document: self
+            isContainer: true
         )
         
         // Create a content section with the current document content
@@ -156,8 +155,7 @@ final class Document {
             title: "Content",
             content: self.content,
             type: "text",
-            isContainer: false,
-            document: self
+            isContainer: false
         )
         
         // Add content section to root
@@ -170,6 +168,59 @@ final class Document {
         
         // Update counts
         updateCounts()
+    }
+    
+    /// Converts a hierarchical document back to a flat structure
+    func convertToFlat() {
+        guard isHierarchical, let root = rootSection else { return }
+        
+        // Collect all content from the hierarchical structure
+        let flatContent = collectAllContent(from: root)
+        
+        // Update document content
+        self.content = flatContent
+        
+        // Remove the hierarchical structure
+        self.rootSection = nil
+        self.isHierarchical = false
+        
+        // Update counts
+        updateCounts()
+    }
+    
+    private func collectAllContent(from section: DocumentSection) -> String {
+        var result = ""
+        
+        // Add this section's content if it's not empty
+        if !section.content.isEmpty {
+            if !result.isEmpty {
+                result += "\n\n"
+            }
+            
+            // Add section title as header if it's not "root" or "Content"
+            if !section.title.isEmpty && section.title != "root" && section.title != "Content" {
+                let headerLevel = min(section.depth + 1, 6)
+                let headerPrefix = String(repeating: "#", count: headerLevel)
+                result += "\(headerPrefix) \(section.title)\n\n"
+            }
+            
+            result += section.content
+        }
+        
+        // Add children content recursively
+        if let children = section.children?.sorted(by: { $0.sortOrder < $1.sortOrder }) {
+            for child in children {
+                let childContent = collectAllContent(from: child)
+                if !childContent.isEmpty {
+                    if !result.isEmpty {
+                        result += "\n\n"
+                    }
+                    result += childContent
+                }
+            }
+        }
+        
+        return result
     }
     
     /// Creates a new section in the document
@@ -188,8 +239,7 @@ final class Document {
             content: content,
             type: type,
             isContainer: isContainer,
-            parent: actualParent,
-            document: self
+            parent: actualParent
         )
         
         // Add to parent

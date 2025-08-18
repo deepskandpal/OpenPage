@@ -236,8 +236,7 @@ class ProjectTemplateFactory {
             title: template.title,
             content: template.content,
             type: template.type,
-            isContainer: template.isContainer,
-            document: document
+            isContainer: template.isContainer
         )
         
         // Add children recursively

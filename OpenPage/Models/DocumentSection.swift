@@ -8,7 +8,7 @@ final class SectionMetadata {
     var label: String?
     var synopsis: String?
     var notes: String?
-    var customFields: [String: String]
+    var customFields: [String: String] = [:]
     var color: String?
     
     init(
@@ -38,9 +38,10 @@ final class DocumentSection {
     var updatedAt: Date
     
     // Hierarchical properties
-    @Relationship(deleteRule: .cascade, inverse: \DocumentSection.parent)
+    @Relationship(deleteRule: .cascade)
     var children: [DocumentSection]?
     
+    @Relationship(inverse: \DocumentSection.children)
     var parent: DocumentSection?
     var sortOrder: Int
     
@@ -49,6 +50,7 @@ final class DocumentSection {
     var isContainer: Bool  // True for folders, false for leaf documents
     
     // Metadata
+    @Relationship(deleteRule: .cascade)
     var metadata: SectionMetadata?
     
     // Document relationship - remove to break circular reference
@@ -64,8 +66,7 @@ final class DocumentSection {
         type: String = "text",
         isContainer: Bool = false,
         parent: DocumentSection? = nil,
-        sortOrder: Int = 0,
-        document: Document? = nil
+        sortOrder: Int = 0
     ) {
         self.id = UUID()
         self.title = title
@@ -86,6 +87,10 @@ final class DocumentSection {
     // MARK: - Content Management
     
     func updateCounts() {
+        updateCounts(propagateUp: true)
+    }
+    
+    private func updateCounts(propagateUp: Bool) {
         if isContainer {
             var totalWords = 0
             var totalChars = 0
@@ -93,7 +98,7 @@ final class DocumentSection {
             // Sum up counts from children
             if let children = children {
                 for child in children {
-                    child.updateCounts()
+                    child.updateCounts(propagateUp: false) // Don't propagate up from children
                     totalWords += child.wordCount
                     totalChars += child.characterCount
                 }
@@ -108,9 +113,9 @@ final class DocumentSection {
         
         self.updatedAt = Date()
         
-        // Propagate changes upward
-        if let parent = parent {
-            parent.updateCounts()
+        // Only propagate changes upward if requested (avoid infinite recursion)
+        if propagateUp, let parent = parent {
+            parent.updateCounts(propagateUp: true)
         }
     }
     

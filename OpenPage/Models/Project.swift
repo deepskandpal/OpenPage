@@ -14,7 +14,7 @@ final class Project {
     @Relationship(deleteRule: .cascade, inverse: \Document.project)
     var documents: [Document] = []
     
-    var tags: [String]
+    var tags: [String] = []
     
     init(
         name: String,

@@ -5,7 +5,7 @@ import Combine
 struct EditorView: View {
     var document: Document
     @Environment(\.modelContext) private var modelContext
-    @EnvironmentObject var settingsViewModel: SettingsViewModel
+    @EnvironmentObject var appState: AppState
     @State private var selectedTab = "edit"
     @State private var selectedSectionId: UUID? = nil
     @State private var documentContent: String
@@ -13,7 +13,6 @@ struct EditorView: View {
     @State private var lastSavedDate: Date?
     @State private var autoSaveTimer: Timer?
     
-    @State private var showFormatToolbar = false
     @State private var showCommandPalette = false
     @FocusState private var isEditorFocused: Bool
     
@@ -26,145 +25,61 @@ struct EditorView: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            // Editor toolbar
-            HStack {
-                Text(document.title)
-                    .font(.headline)
-                
-                Spacer()
-                
-                // Convert to hierarchical button if not already hierarchical
+            // Document Header
+            DocumentHeader(
+                document: document,
+                selectedTab: $selectedTab,
+                showCommandPalette: $showCommandPalette
+            )
+            
+            // Main Editor Area
+            Group {
                 if !document.isHierarchical {
-                    Button("Convert to Hierarchical") {
-                        document.convertToHierarchical()
-                    }
-                    .help("Convert to a hierarchical document with sections")
-                }
-                
-                // Word count display
-                if settingsViewModel.showWordCount {
-                    Text("\(document.wordCount) words")
-                        .font(.caption)
-                        .foregroundColor(.secondary)
-                }
-                
-                // Character count display
-                if settingsViewModel.showCharacterCount {
-                    Text("\(document.characterCount) chars")
-                        .font(.caption)
-                        .foregroundColor(.secondary)
-                        .padding(.leading, 8)
-                }
-                
-                // View selector
-                Picker("View", selection: $selectedTab) {
-                    Text("Edit").tag("edit")
-                    Text("Preview").tag("preview") 
-                    Text("Split").tag("split")
-                }
-                .pickerStyle(.segmented)
-                .frame(width: 180)
-                
-                // Format toolbar toggle
-                Button(action: {
-                    showFormatToolbar.toggle()
-                }) {
-                    Image(systemName: "textformat")
-                }
-                .buttonStyle(.borderless)
-                .help("Formatting Tools")
-                
-                // Command palette toggle
-                Button(action: {
-                    showCommandPalette.toggle()
-                }) {
-                    Image(systemName: "command")
-                }
-                .buttonStyle(.borderless)
-                .help("Command Palette")
-            }
-            .padding()
-            .background(Color(NSColor.windowBackgroundColor))
-            
-            // Format toolbar if showing
-            if showFormatToolbar {
-                FormatToolbar(text: $documentContent)
-                    .transition(.move(edge: .top).combined(with: .opacity))
-            }
-            
-            // Main editor area
-            if !document.isHierarchical || !settingsViewModel.useHierarchicalEditing {
-                // Use traditional editor when document has no sections or hierarchical editing is disabled
-                if selectedTab == "edit" {
-                    TextEditor(text: $documentContent)
-                        .font(Font.custom(settingsViewModel.fontName, size: settingsViewModel.fontSize))
-                        .focused($isEditorFocused)
-                        .padding()
-                        .background(settingsViewModel.isDarkMode ? Color.black.opacity(0.8) : Color.white)
-                        .cornerRadius(4)
-                        .padding(4)
-                        .onChange(of: documentContent) {
-                            document.content = documentContent
-                            document.updateCounts()
-                            isDirty = true
-                        }
-                } else if selectedTab == "preview" {
-                    ScrollView {
-                        Text(LocalizedStringKey(documentContent))
-                            .textSelection(.enabled)
-                            .padding()
-                            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-                    }
-                } else {
-                    HSplitView {
-                        TextEditor(text: $documentContent)
-                            .font(Font.custom(settingsViewModel.fontName, size: settingsViewModel.fontSize))
-                            .focused($isEditorFocused)
-                            .padding()
-                            .background(settingsViewModel.isDarkMode ? Color.black.opacity(0.8) : Color.white)
-                            .cornerRadius(4)
-                            .padding(4)
-                            .onChange(of: documentContent) {
-                                document.content = documentContent
-                                document.updateCounts()
-                                isDirty = true
+                    // Hybrid flat document editor - reliable TextEditor with simple toolbar
+                    VStack(spacing: 0) {
+                        // Simple formatting toolbar
+                        SimpleEditorToolbar(content: documentContent)
+                        
+                        // Reliable text editor
+                        if selectedTab == "edit" {
+                            TextEditor(text: $documentContent)
+                                .font(.system(size: 16, design: .monospaced))
+                                .focused($isEditorFocused)
+                                .padding(16)
+                                .background(Color(.textBackgroundColor))
+                                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                                .onChange(of: documentContent) { oldValue, newValue in
+                                    document.content = newValue
+                                    document.updateCounts()
+                                    isDirty = true
+                                }
+                        } else if selectedTab == "preview" {
+                            MarkdownPreviewView(content: documentContent)
+                        } else {
+                            // Split view
+                            HSplitView {
+                                TextEditor(text: $documentContent)
+                                    .font(.system(size: 16, design: .monospaced))
+                                    .focused($isEditorFocused)
+                                    .padding(16)
+                                    .background(Color(.textBackgroundColor))
+                                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                                    .onChange(of: documentContent) { oldValue, newValue in
+                                        document.content = newValue
+                                        document.updateCounts()
+                                        isDirty = true
+                                    }
+                                
+                                MarkdownPreviewView(content: documentContent)
                             }
-                        
-                        Divider()
-                        
-                        ScrollView {
-                            Text(LocalizedStringKey(documentContent))
-                                .textSelection(.enabled)
-                                .padding()
-                                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
                         }
                     }
-                }
-            } else {
-                // Use hierarchical editor when document has sections and hierarchical editing is enabled
-                HierarchicalEditorView(document: document, selectedSectionId: $selectedSectionId)
-            }
-            
-            // Status bar
-            HStack {
-                if let lastSaved = lastSavedDate {
-                    Text("Last saved: \(lastSaved, formatter: dateFormatter)")
-                        .font(.caption)
-                        .foregroundColor(.secondary)
-                }
-                
-                Spacer()
-                
-                // Dirty indicator
-                if isDirty {
-                    Text("Unsaved changes")
-                        .font(.caption)
-                        .foregroundColor(.secondary)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                } else {
+                    // Hierarchical document editor
+                    HierarchicalEditorView(document: document, selectedSectionId: $selectedSectionId)
                 }
             }
-            .padding(.horizontal)
-            .padding(.vertical, 4)
-            .background(Color(NSColor.windowBackgroundColor))
         }
         .overlay(alignment: .top) {
             if showCommandPalette {
@@ -173,16 +88,24 @@ struct EditorView: View {
             }
         }
         .onAppear {
-            if settingsViewModel.autoSaveEnabled {
-                startAutoSave(interval: TimeInterval(settingsViewModel.autoSaveInterval))
+            // Ensure documentContent is synced with document.content
+            documentContent = document.content
+            startAutoSave()
+            // Focus the editor when it appears
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                isEditorFocused = true
             }
         }
         .onDisappear {
             stopAutoSave()
-            
-            // Save before leaving
             if isDirty {
                 saveDocument()
+            }
+        }
+        .onChange(of: document.content) { oldValue, newValue in
+            // Update documentContent when document.content changes (e.g., from convert operations)
+            if documentContent != newValue {
+                documentContent = newValue
             }
         }
     }
@@ -194,9 +117,10 @@ struct EditorView: View {
         lastSavedDate = Date()
     }
     
-    private func startAutoSave(interval: TimeInterval) {
+    private func startAutoSave() {
         stopAutoSave()
-        autoSaveTimer = Timer.scheduledTimer(withTimeInterval: interval, repeats: true) { _ in
+        // Auto-save every 30 seconds
+        autoSaveTimer = Timer.scheduledTimer(withTimeInterval: 30, repeats: true) { _ in
             if isDirty {
                 saveDocument()
             }
@@ -218,82 +142,80 @@ struct EditorView: View {
 
 // MARK: - Supporting Views
 
-struct FormatToolbar: View {
-    @Binding var text: String
+struct DocumentHeader: View {
+    let document: Document
+    @Binding var selectedTab: String
+    @Binding var showCommandPalette: Bool
     
     var body: some View {
         HStack {
-            Button(action: { formatText(with: "**") }) {
-                Image(systemName: "bold")
+            Text(document.title)
+                .font(.headline)
+                .foregroundColor(.primary)
+            
+            Spacer()
+            
+            // Convert buttons
+            if !document.isHierarchical {
+                Button("Convert to Hierarchical") {
+                    document.convertToHierarchical()
+                }
+                .buttonStyle(.bordered)
+                .help("Convert to a hierarchical document with sections")
+            } else {
+                Button("Convert to Flat") {
+                    document.convertToFlat()
+                }
+                .buttonStyle(.bordered)
+                .help("Convert back to a flat document structure")
+            }
+            
+            // View selector
+            Picker("View", selection: $selectedTab) {
+                Text("Edit").tag("edit")
+                Text("Preview").tag("preview") 
+                Text("Split").tag("split")
+            }
+            .pickerStyle(.segmented)
+            .frame(width: 180)
+            
+            // Command palette toggle
+            Button(action: {
+                showCommandPalette.toggle()
+            }) {
+                Image(systemName: "command")
             }
             .buttonStyle(.borderless)
-            
-            Button(action: { formatText(with: "*") }) {
-                Image(systemName: "italic")
-            }
-            .buttonStyle(.borderless)
-            
-            Button(action: { formatText(with: "~~") }) {
-                Image(systemName: "strikethrough")
-            }
-            .buttonStyle(.borderless)
-            
-            Divider()
-            
-            Button(action: { insertMarkdown("# ") }) {
-                Text("H1")
-                    .fontWeight(.bold)
-            }
-            .buttonStyle(.borderless)
-            
-            Button(action: { insertMarkdown("## ") }) {
-                Text("H2")
-                    .fontWeight(.bold)
-            }
-            .buttonStyle(.borderless)
-            
-            Button(action: { insertMarkdown("### ") }) {
-                Text("H3")
-                    .fontWeight(.bold)
-            }
-            .buttonStyle(.borderless)
-            
-            Divider()
-            
-            Button(action: { insertMarkdown("- ") }) {
-                Image(systemName: "list.bullet")
-            }
-            .buttonStyle(.borderless)
-            
-            Button(action: { insertMarkdown("1. ") }) {
-                Image(systemName: "list.number")
-            }
-            .buttonStyle(.borderless)
-            
-            Button(action: { insertMarkdown("> ") }) {
-                Image(systemName: "text.quote")
-            }
-            .buttonStyle(.borderless)
-            
-            Button(action: { insertMarkdown("```\n\n```") }) {
-                Image(systemName: "chevron.left.forwardslash.chevron.right")
-            }
-            .buttonStyle(.borderless)
+            .help("Command Palette (⌘K)")
         }
-        .padding(.horizontal)
-        .padding(.vertical, 8)
-        .background(Color(NSColor.controlBackgroundColor))
+        .padding(.horizontal, 16)
+        .padding(.vertical, 12)
+        .background(.ultraThinMaterial)
+        .overlay(
+            Rectangle()
+                .frame(height: 0.5)
+                .foregroundColor(.secondary.opacity(0.3)),
+            alignment: .bottom
+        )
     }
+}
+
+struct MarkdownPreviewView: View {
+    let content: String
     
-    private func formatText(with marker: String) {
-        // This would require access to the NSTextView to handle selections
-        // In a real implementation, we'd need to handle this properly
-        text = text + marker + "text" + marker
-    }
-    
-    private func insertMarkdown(_ markdown: String) {
-        // Again, in a real implementation, we'd insert at cursor position
-        text = text + "\n" + markdown
+    var body: some View {
+        ScrollView {
+            VStack(alignment: .leading, spacing: 16) {
+                // This is a simplified markdown preview
+                // In a real app, you'd use a proper markdown renderer
+                Text(LocalizedStringKey(content))
+                    .textSelection(.enabled)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+            }
+            .padding(40)
+        }
+        .background(Color(.textBackgroundColor))
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 }
 
@@ -358,11 +280,96 @@ struct CommandPaletteView: View {
     }
 }
 
+// MARK: - Simple Editor Toolbar
+
+struct SimpleEditorToolbar: View {
+    let content: String
+    
+    var body: some View {
+        HStack(spacing: 12) {
+            // Text formatting
+            Button(action: {}) {
+                Image(systemName: "bold")
+            }
+            .help("Bold")
+            
+            Button(action: {}) {
+                Image(systemName: "italic")
+            }
+            .help("Italic")
+            
+            Button(action: {}) {
+                Image(systemName: "chevron.left.forwardslash.chevron.right")
+            }
+            .help("Code")
+            
+            Divider()
+                .frame(height: 20)
+            
+            // Headers
+            Button(action: {}) {
+                Text("H1")
+                    .font(.caption)
+            }
+            .help("Header 1")
+            
+            Button(action: {}) {
+                Text("H2")
+                    .font(.caption)
+            }
+            .help("Header 2")
+            
+            Button(action: {}) {
+                Text("H3")
+                    .font(.caption)
+            }
+            .help("Header 3")
+            
+            Divider()
+                .frame(height: 20)
+            
+            // Lists
+            Button(action: {}) {
+                Image(systemName: "list.bullet")
+            }
+            .help("Bullet List")
+            
+            Button(action: {}) {
+                Image(systemName: "list.number")
+            }
+            .help("Numbered List")
+            
+            Spacer()
+            
+            Text("Words: \(countWords(in: content)) Characters: \(countChars(in: content))")
+                .font(.caption)
+                .foregroundColor(.secondary)
+        }
+        .padding(.horizontal, 16)
+        .padding(.vertical, 8)
+        .background(Color(.controlBackgroundColor))
+        .overlay(
+            Rectangle()
+                .frame(height: 0.5)
+                .foregroundColor(.secondary.opacity(0.3)),
+            alignment: .bottom
+        )
+    }
+    
+    private func countWords(in text: String) -> Int {
+        text.split(separator: " ").count
+    }
+    
+    private func countChars(in text: String) -> Int {
+        text.count
+    }
+}
+
 // MARK: - Preview
 struct EditorView_Previews: PreviewProvider {
     static var previews: some View {
-        let document = Document(title: "Sample Document", content: "# Hello World\n\nThis is a sample document.")
+        let document = Document(title: "Sample Document", content: "# Hello World\n\nThis is a **sample document** with *italic text* and `code`.\n\n## Features\n\n- Modern editor\n- Markdown support\n- Multiple themes\n- Writing statistics")
         return EditorView(document: document)
-            .environmentObject(SettingsViewModel(appSettings: AppSettings()))
+            .environmentObject(AppState.preview)
     }
 } 

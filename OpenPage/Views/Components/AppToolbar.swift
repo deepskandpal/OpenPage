@@ -6,7 +6,7 @@ struct AppToolbar: View {
     
     var body: some View {
         HStack {
-            Text("Vibe Writing")
+            Text("OpenPage")
                 .font(.headline)
             
             Spacer()

@@ -8,7 +8,7 @@ struct EditorPanel: View {
     var body: some View {
         VStack(spacing: 0) {
             // Editor toolbar
-            EditorToolbar(appState: appState)
+            EditorPanelToolbar(appState: appState)
             
             // Editor content
             EditorContent(appState: appState)
@@ -17,7 +17,7 @@ struct EditorPanel: View {
     }
 }
 
-private struct EditorToolbar: View {
+private struct EditorPanelToolbar: View {
     @ObservedObject var appState: AppState
     
     var body: some View {
@@ -68,7 +68,7 @@ private struct EditorContent: View {
                 .edgesIgnoringSafeArea(.all)
             
             if let document = appState.selectedDocument {
-                DocumentEditor(document: document, documentService: appState.documentService)
+                DocumentEditor(document: document, documentService: appState.documentService, appState: appState)
             } else {
                 WelcomeView(appState: appState)
             }
@@ -80,9 +80,11 @@ private struct EditorContent: View {
 private struct DocumentEditor: View {
     let document: Document
     let documentService: DocumentService
+    @ObservedObject var appState: AppState
     
     var body: some View {
         EditorView(document: document)
+            .environmentObject(appState)
             .padding()
             .background(
                 RoundedRectangle(cornerRadius: 8)

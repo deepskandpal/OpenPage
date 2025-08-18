@@ -1,6 +1,15 @@
-# OpenPage
-
-A modern, AI-powered document editor and writing application for macOS, built with SwiftUI and SwiftData.
+<div align="center">
+  <img src="OpenPage/OpenPage.png" alt="OpenPage Logo" width="128" height="128">
+  
+  # OpenPage
+  
+  A modern, AI-powered document editor and writing application for macOS, built with SwiftUI and SwiftData.
+  
+  [![macOS](https://img.shields.io/badge/macOS-14.0+-blue.svg)](https://developer.apple.com/macos/)
+  [![Swift](https://img.shields.io/badge/Swift-5.9+-orange.svg)](https://swift.org/)
+  [![SwiftUI](https://img.shields.io/badge/SwiftUI-5.0+-green.svg)](https://developer.apple.com/swiftui/)
+  [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+</div>
 
 ## Features
 

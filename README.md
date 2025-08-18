@@ -3,7 +3,7 @@
   
   # OpenPage
   
-  A modern, AI-powered document editor and writing application for macOS, built with SwiftUI and SwiftData.
+  **iA Writer + AI** - A distraction-free, AI-enhanced writing environment that combines iA Writer's legendary simplicity with intelligent writing assistance.
   
   [![macOS](https://img.shields.io/badge/macOS-14.0+-blue.svg)](https://developer.apple.com/macos/)
   [![Swift](https://img.shields.io/badge/Swift-5.9+-orange.svg)](https://swift.org/)
@@ -13,37 +13,34 @@
 
 ## Features
 
-### 📝 Advanced Document Management
-- **Hierarchical Structure**: Create complex documents with nested sections and chapters
-- **Project Organization**: Group related documents into projects for better workflow management
-- **Version Tracking**: Automatic document versioning with snapshot history
-- **Auto-Save**: Configurable auto-save functionality to prevent data loss
+### 🎯 **Distraction-Free Writing Experience**
+- **Focus Mode**: iA Writer-style sentence/paragraph highlighting with text dimming
+- **Zen Mode**: True full-screen writing with no UI distractions
+- **Typography Excellence**: Beautiful, readable fonts optimized for long writing sessions
+- **Minimal Interface**: UI disappears during writing to maintain flow
 
-### 🤖 AI-Powered Writing Assistant
-- **Multi-Provider Support**: Integrated support for Claude, OpenAI, and Gemini AI services
-- **Task-Specific Routing**: Automatic AI provider selection based on writing task type
-- **Writing Tasks**: 
-  - Creative writing assistance
-  - Technical documentation support
-  - Content analysis and feedback
-  - Brainstorming and idea generation
-  - Editing and proofreading
-  - Research assistance
+### ✍️ **Dual-Mode Text Editor**
+- **Rich Text Mode**: Visual formatting (bold, italic, headers) with markdown stored behind scenes
+- **Syntax Mode**: Raw markdown editing with intelligent syntax highlighting
+- **Seamless Switching**: Toggle between modes instantly while preserving content
+- **Live Preview**: Real-time markdown rendering and formatting
 
-### 🎨 Modern Writing Interface
-- **Panel-Based Layout**: Customizable interface with binder, editor, and inspector panels
-- **Focus Modes**: 
-  - Normal: Full-featured editing
-  - Typewriter: Centered line focus
-  - Zen: Minimal, distraction-free environment
-  - Distraction-Free: Hide all panels
-- **Responsive Design**: Adaptive layout that works across different screen sizes
+### 🤖 **AI Writing Assistant**
+- **Invisible Enhancement**: AI suggestions that appear only when helpful
+- **Privacy-First**: Local processing when possible, encrypted transmission
+- **Context-Aware**: Understands your writing style and document context
+- **Multi-Provider Support**: Claude, OpenAI, and Gemini integration
 
-### 📊 Writing Analytics
-- **Word Count Tracking**: Real-time word and character counts
-- **Writing Goals**: Set and track daily word count targets
-- **Progress Monitoring**: Visual progress indicators for writing objectives
-- **Writing Streaks**: Track daily writing consistency
+### 🔧 **Advanced Text Features**
+- **Syntax Control**: Highlight weak verbs, filler words, and repetitive phrases
+- **Wikilinks**: Connect documents with [[double bracket]] linking
+- **Smart Formatting**: Intelligent markdown shortcuts and auto-completion
+- **Document Organization**: Project-based file management
+
+### 📊 **Writing Analytics** (Planned)
+- **Writing Statistics**: Word count, reading time, character analysis
+- **Focus Metrics**: Track distraction-free writing sessions
+- **Progress Tracking**: Daily writing goals and streak monitoring
 
 ## Requirements
 
@@ -66,12 +63,18 @@
    cd OpenPage
    ```
 
-2. Open the project in Xcode:
+2. **Read the documentation first:**
+   - [docs/SESSION_STATE.md](./docs/SESSION_STATE.md) - Current development status
+   - [docs/PROJECT_PLAN.md](./docs/PROJECT_PLAN.md) - Complete roadmap
+   - [docs/DEVELOPMENT_GUIDE.md](./docs/DEVELOPMENT_GUIDE.md) - Best practices
+   - [CLAUDE.md](./CLAUDE.md) - Claude Code guidance
+
+3. Open the project in Xcode:
    ```bash
    open OpenPage.xcodeproj
    ```
 
-3. Build and run the project using `Cmd+R`
+4. Build and run the project using `Cmd+R`
 
 ## Configuration
 
@@ -114,18 +117,31 @@ API keys are stored securely in the macOS Keychain.
 
 ## Architecture
 
-OpenPage is built using modern SwiftUI and SwiftData technologies:
+OpenPage follows **iA Writer's design philosophy** with modern Swift technologies:
 
-- **SwiftUI**: Declarative user interface framework
-- **SwiftData**: Core Data successor for data persistence
-- **Combine**: Reactive programming for state management
-- **Foundation**: Core Swift frameworks
+### **Design Principles**
+- **Radical Simplicity**: "The main feature is not having many features"
+- **Focus First**: Every feature serves the goal of better writing
+- **AI Enhancement**: Intelligent assistance that works invisibly
+- **Writer's Privacy**: AI processing with complete data privacy
 
-### Key Components
-- **Document Model**: Hierarchical document structure with sections
-- **Project Management**: Organization system for related documents
-- **AI Service Layer**: Abstracted AI provider integration
-- **State Management**: Centralized app state using ObservableObject
+### **Technical Stack**
+- **SwiftUI + AppKit**: Native macOS text editing with NSTextView
+- **MVVM + Services**: Clean architecture with clear separation of concerns
+- **SwiftData**: Modern data persistence
+- **Combine**: Reactive state management
+
+### **Key Components**
+- **ContentManager**: Dual-mode display management (rich text ↔ markdown)
+- **MarkdownRenderer**: Bidirectional conversion with syntax highlighting
+- **FormattingService**: Toolbar button functionality for both modes
+- **AI Service Layer**: Multi-provider integration with privacy focus
+
+### **Documentation**
+Complete technical documentation is available in the [docs/](./docs/) directory:
+- **[Project Plan](./docs/PROJECT_PLAN.md)**: 6 epics, 14 sprints roadmap
+- **[Development Guide](./docs/DEVELOPMENT_GUIDE.md)**: Best practices and patterns
+- **[Architecture Decisions](./docs/ARCHITECTURE_DECISION_LOG.md)**: Decision history and rationale
 
 ## Contributing
 

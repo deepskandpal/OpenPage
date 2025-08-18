@@ -122,7 +122,8 @@ struct ModernEditorView: View {
     
     private func handleFormatting(_ action: FormattingAction) {
         print("DEBUG: ModernEditorView.handleFormatting called with: \(action)")
-        FormattingService.shared.applyFormatting(action)
+        // Use ContentManager for dual-mode formatting support
+        ContentManager.shared.applyFormatting(action, theme: editorTheme, fontSize: fontSize, lineHeight: lineHeight)
     }
 }
 

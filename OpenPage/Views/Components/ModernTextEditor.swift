@@ -1,7 +1,7 @@
 import SwiftUI
 import AppKit
 
-/// Modern text editor with rich text capabilities and markdown support
+/// Modern text editor with dual-mode support: rich text and markdown syntax display
 struct ModernTextEditor: NSViewRepresentable {
     @Binding var content: String
     let theme: EditorTheme
@@ -104,7 +104,7 @@ struct ModernTextEditor: NSViewRepresentable {
         context.coordinator.textView = textView
         context.coordinator.scrollView = scrollView
         
-        // Register with formatting service
+        // Register with both formatting service and content manager
         print("DEBUG: ModernTextEditor about to register textView")
         FormattingService.shared.registerTextView(textView) { [weak textView] newContent in
             guard textView?.string != newContent else { return }
@@ -112,6 +112,17 @@ struct ModernTextEditor: NSViewRepresentable {
                 content = newContent
             }
         }
+        
+        // Register with content manager for dual-mode support
+        ContentManager.shared.registerTextView(textView) { [weak textView] newContent in
+            guard textView?.string != newContent else { return }
+            DispatchQueue.main.async {
+                content = newContent
+            }
+        }
+        
+        // Set initial content in content manager
+        ContentManager.shared.setContent(content, theme: theme, fontSize: fontSize, lineHeight: lineHeight)
         
         // Force the text view to become first responder immediately
         DispatchQueue.main.async {
@@ -144,6 +155,14 @@ struct ModernTextEditor: NSViewRepresentable {
         // Update content if needed
         if textView.string != content {
             textView.string = content
+            // Update content manager when content changes externally
+            ContentManager.shared.updateContent(content, theme: theme, fontSize: fontSize, lineHeight: lineHeight)
+        }
+        
+        // Handle markdown mode changes
+        let displayMode: ContentManager.DisplayMode = isMarkdownMode ? .markdown : .richText
+        if ContentManager.shared.displayMode != displayMode {
+            ContentManager.shared.setDisplayMode(displayMode, theme: theme, fontSize: fontSize, lineHeight: lineHeight)
         }
         
         // Ensure proper sizing
@@ -167,8 +186,12 @@ struct ModernTextEditor: NSViewRepresentable {
             print("DEBUG: Set container size to: \(textView.textContainer?.containerSize ?? NSSize.zero)")
         }
         
-        // Update styling
-        updateTextViewAppearance(textView)
+        // Update styling based on current display mode
+        if isMarkdownMode {
+            updateMarkdownSyntaxHighlighting(textView)
+        } else {
+            updateRichTextAppearance(textView)
+        }
         
         // Update focus mode
         context.coordinator.updateFocusMode(focusMode)
@@ -190,25 +213,11 @@ struct ModernTextEditor: NSViewRepresentable {
     }
     
     
-    private func updateTextViewAppearance(_ textView: ModernNSTextView) {
-        // Create paragraph style with line height
-        let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.lineHeightMultiple = CGFloat(lineHeight)
-        paragraphStyle.lineSpacing = 4
+    private func updateRichTextAppearance(_ textView: ModernNSTextView) {
+        // In rich text mode, content is handled by ContentManager
+        // Just ensure basic styling is applied
         
-        // Create text attributes with explicit text color
-        let textColor = NSColor.labelColor // Use system label color for better contrast
-        let attributes: [NSAttributedString.Key: Any] = [
-            .font: NSFont.systemFont(ofSize: CGFloat(fontSize), weight: .regular),
-            .foregroundColor: textColor,
-            .paragraphStyle: paragraphStyle
-        ]
-        
-        // Apply attributes to all text
-        let range = NSRange(location: 0, length: textView.string.count)
-        textView.textStorage?.addAttributes(attributes, range: range)
-        
-        // Update background color and ensure proper cursor visibility
+        // Update background color and cursor
         DispatchQueue.main.async {
             textView.backgroundColor = NSColor(theme.backgroundColor)
             textView.insertionPointColor = NSColor(theme.accentColor)
@@ -221,17 +230,38 @@ struct ModernTextEditor: NSViewRepresentable {
             .foregroundColor: NSColor.labelColor
         ]
         
-        // Set default typing attributes to ensure new text is visible
+        // Set default typing attributes
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineHeightMultiple = CGFloat(lineHeight)
+        paragraphStyle.lineSpacing = 4
+        
         textView.typingAttributes = [
             .font: NSFont.systemFont(ofSize: CGFloat(fontSize), weight: .regular),
             .foregroundColor: NSColor.labelColor,
             .paragraphStyle: paragraphStyle
         ]
+    }
+    
+    private func updateMarkdownSyntaxHighlighting(_ textView: ModernNSTextView) {
+        // Apply syntax highlighting for markdown mode
+        let attributedString = NSMutableAttributedString(string: textView.string)
+        MarkdownRenderer.shared.applySyntaxHighlighting(to: attributedString, theme: theme, fontSize: fontSize)
         
-        // Apply markdown highlighting if enabled
-        if isMarkdownMode {
-            applyMarkdownSyntaxHighlighting(textView)
+        // Update text view with highlighted content
+        textView.textStorage?.setAttributedString(attributedString)
+        
+        // Update background color and cursor
+        DispatchQueue.main.async {
+            textView.backgroundColor = NSColor(theme.backgroundColor)
+            textView.insertionPointColor = NSColor(theme.accentColor)
+            textView.needsDisplay = true
         }
+        
+        // Configure selection appearance
+        textView.selectedTextAttributes = [
+            .backgroundColor: NSColor(theme.accentColor.opacity(0.3)),
+            .foregroundColor: NSColor.labelColor
+        ]
     }
     
     private func applyMarkdownSyntaxHighlighting(_ textView: NSTextView) {
@@ -304,9 +334,10 @@ struct ModernTextEditor: NSViewRepresentable {
         }
         
         deinit {
-            // Unregister from formatting service
+            // Unregister from services
             if let textView = textView {
                 FormattingService.shared.unregisterTextView(textView)
+                ContentManager.shared.unregisterTextView(textView)
             }
         }
         
@@ -321,18 +352,26 @@ struct ModernTextEditor: NSViewRepresentable {
             parent.content = textView.string
             print("DEBUG: textDidChange - parent.content after: '\(parent.content)'")
             
+            // Update content manager with the new content
+            ContentManager.shared.updateContent(textView.string, theme: parent.theme, fontSize: parent.fontSize, lineHeight: parent.lineHeight)
+            
             // Force immediate display refresh
             textView.needsDisplay = true
             textView.needsLayout = true
             
-            // Apply syntax highlighting with debouncing
-            NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(applySyntaxHighlighting), object: nil)
-            perform(#selector(applySyntaxHighlighting), with: nil, afterDelay: 0.3)
+            // Apply appropriate styling with debouncing
+            NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(updateStyling), object: nil)
+            perform(#selector(updateStyling), with: nil, afterDelay: 0.3)
         }
         
-        @objc private func applySyntaxHighlighting() {
+        @objc private func updateStyling() {
             guard let textView = textView else { return }
-            parent.updateTextViewAppearance(textView)
+            
+            if parent.isMarkdownMode {
+                parent.updateMarkdownSyntaxHighlighting(textView)
+            } else {
+                parent.updateRichTextAppearance(textView)
+            }
         }
         
         // MARK: - NSTextStorageDelegate
